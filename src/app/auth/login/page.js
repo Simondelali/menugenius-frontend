@@ -3,12 +3,14 @@
 import React, { useState } from "react";
 import axiosInstance from "@/app/utils/axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,6 +26,8 @@ export default function Login() {
         localStorage.setItem("accessToken", response.data.access);
         localStorage.setItem("refreshToken", response.data.refresh);
         // Redirect or perform additional actions here
+        router.push('../dashboard')
+        
       }
     } catch (error) {
       if (error.response.status === 401) {
