@@ -14,8 +14,8 @@ export default function Page() {
           <p className="text-slate-500 text-sm font-bold">Hi Simon,</p>
           <p className="text-indigo-900 text-4xl font-bold">Welcome Back!</p>
         </div>
-        <div className="w-96 h-14 bg-white rounded-3xl shadow flex items-center px-4 justify-between">
-          <div className="w-52 h-10 bg-blue-50 rounded-3xl flex justify-start items-center px-4">
+        <div className="w-96 h-12 bg-white rounded-3xl shadow flex items-center px-4 justify-between">
+          <div className="w-52 h-8 bg-blue-50 rounded-3xl flex justify-start items-center px-4">
             <HiSearch />
             <p className="text-slate-400 text-sm font-normal ml-2">Search</p>
           </div>
@@ -23,8 +23,8 @@ export default function Page() {
           <FaMoon size={24} className="text-slate-400" />
           <IoMdInformationCircleOutline size={24} className="text-slate-400" />
           <Image
-            width="42"
-            height="42"
+            width="36"
+            height="36"
             alt="profile img"
             src="/images/Elipse 5.png"
             className="rounded-3xl"
