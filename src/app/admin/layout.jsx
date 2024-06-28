@@ -1,6 +1,4 @@
 "use client";
-import { IoHomeOutline } from "react-icons/io5";
-import { RiArticleLine, RiGraduationCapLine } from "react-icons/ri";
 
 import { HiOutlineUsers } from "react-icons/hi2";
 import { BiCategory } from "react-icons/bi";
@@ -9,12 +7,55 @@ import { GoStack } from "react-icons/go";
 import { CiSettings } from "react-icons/ci";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
-import { FaRegCalendarAlt } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
+import { useEffect, useState } from "react";
+import axiosInstance from "../utils/axios";
 
 export default function Layout({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = sessionStorage.getItem("accessToken");
+        const response = await axiosInstance.post("/user/token/verify/admin/", {
+          token: token,
+        });
+        if (response.status === 200){
+          setIsAuthenticated(true)
+        }
+      } catch (error) {
+        const refreshToken = sessionStorage.getItem("refreshToken");
+        if (refreshToken) {
+          try {
+            const response = await axiosInstance.post("/user/token/refresh/", {
+              refresh: refreshToken,
+            });
+            const { access } = response.data;
+            sessionStorage.setItem("accessToken", access);
+            axiosInstance.defaults.headers["Authorization"] =
+              "Bearer " + access;
+            setIsAuthenticated(true);
+          } catch (refreshError) {
+            console.log("Refresh token failed", refreshError);
+            router.push("/auth/admin");
+          }
+        } else {
+          router.push("/auth/admin");
+        }
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
     <div className="flex">
       <div className="h-screen hidden lg:flex w-1/6 justify-center overflow-hidden bg-gray-50">
@@ -37,10 +78,10 @@ export function SideNav() {
       <div className=" border border-indigo-100 mt-2 "></div>
 
       
-        <div className="flex flex-col p-8 gap-4">
+        <div className="flex flex-col mt-8 gap-4">
           <NavLinks />
         </div>
-        <div className="flex gap-2 p-8 fixed bottom-0">
+        <div className="flex gap-2 p-4 fixed bottom-0">
           <div className="flex gap-4 text-slate-500">
             <RiLogoutCircleRLine size={24} />
             <p>Logout</p>

@@ -10,7 +10,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
+        const token = sessionStorage.getItem("accessToken");
         const response = await axiosInstance.post("/user/token/verify/", {
           token: token,
         });
@@ -18,23 +18,23 @@ export default function Layout({ children }) {
           setIsAuthenticated(true);
         }
       } catch (error) {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = sessionStorage.getItem("refreshToken");
         if (refreshToken) {
           try {
             const response = await axiosInstance.post("/user/token/refresh/", {
               refresh: refreshToken,
             });
             const { access } = response.data;
-            localStorage.setItem("accessToken", access);
+            sessionStorage.setItem("accessToken", access);
             axiosInstance.defaults.headers["Authorization"] =
               "Bearer " + access;
             setIsAuthenticated(true);
           } catch (refreshError) {
             console.log("Refresh token failed", refreshError);
-            router.push("./auth/login");
+            router.push("/auth/login");
           }
         } else {
-          router.push("./auth/login");
+          router.push("/auth/login");
         }
       }
     };

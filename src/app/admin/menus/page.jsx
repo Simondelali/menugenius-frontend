@@ -53,7 +53,7 @@ export function MenuTable(){
   );
 
 
-  if (error) return <div>{error}</div>;
+  if (error) return <div className="text-red-500">{error}</div>;
 
   return(
   <div className="overflow-x-auto">
