@@ -1,7 +1,7 @@
 "use client";
 import axiosInstance from "@/app/utils/axios";
 import { useEffect, useState } from "react";
-import { TiFlowChildren } from "react-icons/ti";
+import { TiFlowSwitch } from "react-icons/ti";
 import { CardSkeleton } from "./stat-skeletons";
 
 export default function TotaMenusCard() {
@@ -30,7 +30,7 @@ export default function TotaMenusCard() {
       ) : (
         <div className="flex items-center w-3/12 h-24 bg-white rounded-2xl p-4 gap-4">
           <div className="bg-blue-50 h-14 w-14 rounded-full text-blue-600 flex justify-center items-center">
-            <TiFlowChildren size={30} />
+            <TiFlowSwitch size={30} />
           </div>
           <div>
             <p className="text-slate-400 text-sm font-medium ">Total Menus</p>
