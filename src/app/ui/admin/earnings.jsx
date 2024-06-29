@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import { BsGraphUpArrow } from "react-icons/bs";
+import { IoBarChart } from "react-icons/io5";
 
 export default function EarningsCard(){
     const [data, setData] = useState([]);
@@ -9,7 +9,7 @@ export default function EarningsCard(){
     return(
     <div className="flex items-center w-3/12 h-24 bg-white rounded-2xl p-4 gap-4">
         <div className="bg-blue-50 h-14 w-14 rounded-full text-blue-600 flex justify-center items-center">
-            <BsGraphUpArrow size={30}/>
+            <IoBarChart size={30}/>
         </div>
         <div>
             <p className="text-slate-400 text-sm font-medium ">Earnings</p>
