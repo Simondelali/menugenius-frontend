@@ -28,13 +28,11 @@ export function UserTable(){
   const [error, setError]= useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 8;
-
   useEffect(() => {
     const getUsers = async () => {
       try {
         const response = await axiosInstance.get('/api/users/');
         setUsers(response.data);
-        console.log(response.data);
       } catch (error) {
         setError('Failed to fecth users')
       }
