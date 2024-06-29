@@ -10,7 +10,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = sessionStorage.getItem("accessToken");
+        const token = localStorage.getItem("userAccessToken");
         const response = await axiosInstance.post("/user/token/verify/", {
           token: token,
         });
@@ -18,14 +18,14 @@ export default function Layout({ children }) {
           setIsAuthenticated(true);
         }
       } catch (error) {
-        const refreshToken = sessionStorage.getItem("refreshToken");
+        const refreshToken = localStorage.getItem("userRefreshToken");
         if (refreshToken) {
           try {
             const response = await axiosInstance.post("/user/token/refresh/", {
               refresh: refreshToken,
             });
             const { access } = response.data;
-            sessionStorage.setItem("accessToken", access);
+            localStorage.setItem("userAccessToken", access);
             axiosInstance.defaults.headers["Authorization"] =
               "Bearer " + access;
             setIsAuthenticated(true);

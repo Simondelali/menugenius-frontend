@@ -23,8 +23,8 @@ export default function Login() {
       });
       if (response.status === 200) {
         setSuccess("Login successful");
-        sessionStorage.setItem("accessToken", response.data.access);
-        sessionStorage.setItem("refreshToken", response.data.refresh);
+        localStorage.setItem("userAccessToken", response.data.access);
+        localStorage.setItem("userRefreshToken", response.data.refresh);
         // Redirect or perform additional actions here
         router.push('../dashboard')
         

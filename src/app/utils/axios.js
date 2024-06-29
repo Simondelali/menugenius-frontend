@@ -7,12 +7,23 @@ const axiosInstance = axios.create({
   },
 });
 
+
 axiosInstance.interceptors.request.use(
   config => {
-    const token = sessionStorage.getItem('accessToken'); 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    const currentPath = window.location.pathname;
+    
+    if (currentPath.startsWith('/dashboard')) {
+      const userToken = localStorage.getItem('userAccessToken');
+      if (userToken) {
+        config.headers.Authorization = `Bearer ${userToken}`;
+      }
+    } else if (currentPath.startsWith('/admin')) {
+      const adminToken = localStorage.getItem('adminAccessToken');
+      if (adminToken) {
+        config.headers.Authorization = `Bearer ${adminToken}`;
+      }
+    } 
+    
     return config;
   },
   error => Promise.reject(error)

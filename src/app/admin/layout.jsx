@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import axiosInstance from "../utils/axios";
+import axiosInstance, { setAuthRole } from "../utils/axios";
 
 export default function Layout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,7 +20,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = sessionStorage.getItem("accessToken");
+        const token = localStorage.getItem("adminAccessToken");
         const response = await axiosInstance.post("/user/token/verify/admin/", {
           token: token,
         });
@@ -28,14 +28,14 @@ export default function Layout({ children }) {
           setIsAuthenticated(true)
         }
       } catch (error) {
-        const refreshToken = sessionStorage.getItem("refreshToken");
+        const refreshToken = localStorage.getItem("adminRefreshToken");
         if (refreshToken) {
           try {
             const response = await axiosInstance.post("/user/token/refresh/", {
               refresh: refreshToken,
             });
             const { access } = response.data;
-            sessionStorage.setItem("accessToken", access);
+            localStorage.setItem("adminAccessToken", access);
             axiosInstance.defaults.headers["Authorization"] =
               "Bearer " + access;
             setIsAuthenticated(true);
