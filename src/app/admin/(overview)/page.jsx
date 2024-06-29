@@ -2,6 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 import NotificationBar from "@/app/ui/notification-bar";
+import NewUsersCard from "@/app/ui/admin/new-users";
+import TotalUsersCard from "@/app/ui/admin/total-users";
+import TotaMenusCard from "@/app/ui/admin/total-menus";
+import EarningsCard from "@/app/ui/admin/earnings";
 
 export default function Page() {
   return (
@@ -14,10 +18,10 @@ export default function Page() {
         <NotificationBar />
       </div>
     <div className="flex justify-between mt-8 gap-2">
-      <div className="w-3/12 h-24 bg-white rounded-2xl"></div>
-      <div className="w-3/12 h-24 bg-white rounded-2xl"></div>
-      <div className="w-3/12 h-24 bg-white rounded-2xl"></div>
-      <div className="w-3/12 h-24 bg-white rounded-2xl"></div>
+      <NewUsersCard />
+      <TotalUsersCard />
+      <TotaMenusCard />
+      <EarningsCard />
     </div>
 
     <div className="flex justify-between mt-4 gap-2">
@@ -25,11 +29,12 @@ export default function Page() {
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
     </div>
 
-    <div className="flex justify-between mt-4 gap-2">
-      <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
+    <div className="animate-pulse flex justify-between mt-4 gap-2">
+      <div className="w-2/6 h-72 bg-gray-200 rounded-2xl"></div>
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
     </div>
+    
 
     </div>
   );
