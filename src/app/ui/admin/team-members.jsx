@@ -1,0 +1,54 @@
+import Image from "next/image";
+import { CiCirclePlus } from "react-icons/ci";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+
+const members = [
+    {
+        name: "Simon Delali",
+        position: "Creative Director",
+        profile: "/images/Elipse 5.png",
+    },
+    {
+        name: "Jeremy Kobby",
+        position: "Product Designer",
+        profile: "/images/Elipse 5.png",
+    },
+    {
+        name: "Klogo Selorm",
+        position: "Senior Director",
+        profile: "/images/Elipse 5.png",
+    },
+]
+
+export default function TeamMembersCard(){
+    return(
+        <div className="w-2/6 h-72 bg-white rounded-2xl p-6">
+            <div className="flex justify-between">
+                <div className="text-indigo-900 text-lg font-bold">Team Members</div>
+                <div className="h-7 w-7 bg-blue-50 rounded-lg flex items-center justify-center">
+                    <CiCirclePlus size={24} className="text-blue-700"/>
+                </div>
+            </div>
+            {members.map((member) => {
+                return(
+                <div key={member.name} className="flex items-center rounded-2xl shadow h-16 p-2 mt-2 gap- justify-between">
+                <Image 
+                src={member.profile}
+                alt="profile"
+                width="40"
+                height="40"
+                className="rounded-full -mr-12"
+                />
+                <div className="-ml-20">
+                    <p className="text-indigo-900 text-base font-bold">{member.name}</p>
+                    <p className="text-slate-400 text-xs font-medium">{member.position}</p>
+                </div>
+                <div className="">
+                    <HiOutlineDotsVertical size={24} />
+                </div>
+            </div>
+                )
+            })}
+        </div>
+    )
+}
