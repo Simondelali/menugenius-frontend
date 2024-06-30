@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import axiosInstance, { setAuthRole } from "../utils/axios";
+import axiosInstance from "../utils/axios";
 
 export default function Layout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

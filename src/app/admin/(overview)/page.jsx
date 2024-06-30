@@ -6,6 +6,7 @@ import NewUsersCard from "@/app/ui/admin/new-users";
 import TotalUsersCard from "@/app/ui/admin/total-users";
 import TotaMenusCard from "@/app/ui/admin/total-menus";
 import EarningsCard from "@/app/ui/admin/earnings";
+import TeamMembersCard from "@/app/ui/admin/team-members";
 
 export default function Page() {
   return (
@@ -29,9 +30,9 @@ export default function Page() {
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
     </div>
 
-    <div className="animate-pulse flex justify-between mt-4 gap-2">
-      <div className="w-2/6 h-72 bg-gray-200 rounded-2xl"></div>
+    <div className="flex justify-between mt-4 gap-2">
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
+      <TeamMembersCard />
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
     </div>
     
