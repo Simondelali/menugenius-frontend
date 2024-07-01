@@ -7,6 +7,7 @@ import TotalUsersCard from "@/app/ui/admin/total-users";
 import TotaMenusCard from "@/app/ui/admin/total-menus";
 import EarningsCard from "@/app/ui/admin/earnings";
 import TeamMembersCard from "@/app/ui/admin/team-members";
+import RecentActivity from "@/app/ui/admin/recent-activity";
 
 export default function Page() {
   return (
@@ -27,7 +28,7 @@ export default function Page() {
 
     <div className="flex justify-between mt-4 gap-2">
       <div className="relative w-4/6 h-72 bg-white rounded-2xl"></div>
-      <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
+      <RecentActivity />
     </div>
 
     <div className="flex justify-between mt-4 gap-2">

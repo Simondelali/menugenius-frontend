@@ -31,7 +31,7 @@ export default function TeamMembersCard(){
             </div>
             {members.map((member) => {
                 return(
-                <div key={member.name} className="flex items-center rounded-2xl shadow h-16 p-2 mt-2 gap- justify-between">
+                <div key={member.name} className="flex items-center rounded-2xl shadow h-16 p-2 mt-2 justify-between">
                 <Image 
                 src={member.profile}
                 alt="profile"
