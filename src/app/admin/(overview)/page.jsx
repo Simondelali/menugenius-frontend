@@ -8,6 +8,7 @@ import TotaMenusCard from "@/app/ui/admin/total-menus";
 import EarningsCard from "@/app/ui/admin/earnings";
 import TeamMembersCard from "@/app/ui/admin/team-members";
 import RecentActivity from "@/app/ui/admin/recent-activity";
+import BarChartar from "@/app/ui/admin/barChart";
 
 export default function Page() {
   return (
@@ -27,12 +28,26 @@ export default function Page() {
     </div>
 
     <div className="flex justify-between mt-4 gap-2">
-      <div className="relative w-4/6 h-72 bg-white rounded-2xl"></div>
+      <div className="relative w-4/6 h-72 bg-white rounded-2xl flex justify-center items-center">
+      <Image 
+      src="/images/chart.png"
+      alt="chart"
+      width="660"
+      height="10"
+      />
+      </div>
       <RecentActivity />
     </div>
 
     <div className="flex justify-between mt-4 gap-2">
-      <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
+      <div className="w-2/6 h-72 bg-white rounded-2xl flex justify-center items-center">
+      <Image 
+      src="/images/chart2.png"
+      alt="chart"
+      width="320"
+      height="10"
+      />
+      </div>
       <TeamMembersCard />
       <div className="w-2/6 h-72 bg-white rounded-2xl"></div>
     </div>

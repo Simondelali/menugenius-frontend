@@ -39,7 +39,7 @@ export default function TeamMembersCard(){
                 height="40"
                 className="rounded-full -mr-12"
                 />
-                <div className="-ml-20">
+                <div className="-ml-10">
                     <p className="text-indigo-900 text-base font-bold">{member.name}</p>
                     <p className="text-slate-400 text-xs font-medium">{member.position}</p>
                 </div>
