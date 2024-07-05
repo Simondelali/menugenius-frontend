@@ -32,16 +32,19 @@ export default function TeamMembersCard(){
             {members.map((member) => {
                 return(
                 <div key={member.name} className="flex items-center rounded-2xl shadow h-16 p-2 mt-2 justify-between">
+                <div className="flex gap-4">
+
                 <Image 
                 src={member.profile}
                 alt="profile"
                 width="40"
                 height="40"
-                className="rounded-full -mr-12"
+                className="rounded-full"
                 />
-                <div className="-ml-10">
-                    <p className="text-indigo-900 text-base font-bold">{member.name}</p>
-                    <p className="text-slate-400 text-xs font-medium">{member.position}</p>
+                <div className="">
+                    <p className="text-indigo-900 text-base font-semibold">{member.name}</p>
+                    <p className="text-slate-400 text-xs font-sm">{member.position}</p>
+                </div>
                 </div>
                 <div className="">
                     <HiOutlineDotsVertical size={24} />
