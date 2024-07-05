@@ -13,7 +13,11 @@ export default function Layout({ children }) {
     heading = 'Welcome Back';
     description = 'Sign in to continue.';
     imgUrl = '/images/login.jpg'
-  } else if (pathname === '/auth/recovery') {
+  } else if (pathname === '/auth/admin') {
+    heading = 'Welcome Back';
+    description = 'Sign in to continue.';
+    imgUrl = '/images/login.jpg'
+  }else if (pathname === '/auth/recovery') {
     heading = "Let's help you recover your account";
     description = 'Follow simple steps to reset your password.';
     imgUrl = '/images/recovery.jpg'
@@ -21,7 +25,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="flex h-screen">
-      <div className="hidden lg:flex lg:w-1/2 bg-gray-100 justify-start">
+      <div className="hidden lg:flex lg:w-1/2 justify-start">
       <img 
       src={imgUrl}
       alt="Background Image" 

@@ -58,10 +58,10 @@ export default function Layout({ children }) {
 
   return (
     <div className="flex">
-      <div className="h-screen hidden lg:flex w-1/6 justify-center overflow-hidden bg-gray-50">
+      <div className="hidden lg:flex justify-center overflow-hidden bg-gray-50 p-8 -mt-6">
         <SideNav />
       </div>
-      <div className="h-screen w-full lg:w-5/6 p-8 bg-blue-50 overflow-auto">
+      <div className="h-screen w-full lg:w-full p-8 bg-blue-50 overflow-auto">
         {children}
       </div>
     </div>

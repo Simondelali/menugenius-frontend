@@ -44,8 +44,8 @@ export default function RecentActivity(){
             className="rounded-full"
             />
             <div>
-                <p className="text-slate-700 text-base font-medium">{activity.name}</p>
-                <p className="text-slate-400 text-xs fontmedium">{activity.time} min ago</p>
+                <p className="text-slate-700 text-sm font font-medium">{activity.name}</p>
+                <p className="text-slate-400 text-xs font-medium">{activity.time} min ago</p>
             </div>
           </div>
         )
