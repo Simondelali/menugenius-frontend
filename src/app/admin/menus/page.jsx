@@ -4,30 +4,8 @@ import axiosInstance from "@/app/utils/axios";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  return (
-    <div>
-      <div className="flex justify-between mb-4">
-        <div>
-          <p className="text-indigo-900 text-4xl font-bold">Menu List</p>
-        </div>
-        <NotificationBar />
-      </div>
-      <div className="w-full rounded-3xl bg-white p-8 mt-12">
-      <div className="flex justify-between">
-        <p className="font-semibold">All Menus</p>
-        <div>sort by</div>
-      </div>
-      <MenuTable /> 
-      </div>
-    </div>
-  );
-}
-
-export function MenuTable(){
   const [menus, setMenus] = useState([]);
-  const [error, setError]= useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const menusPerPage = 8;
+  const [sortOrder, setSortOrder] = useState('oldest');
 
   useEffect(() => {
     const getMenus = async () => {
@@ -41,13 +19,74 @@ export function MenuTable(){
     };
     getMenus();
   }, []);
-  const totalPages = Math.ceil(menus.length / menusPerPage);
+
+  return (
+    <div>
+      <div className="flex justify-between mb-4">
+        <div>
+          <p className="text-indigo-900 text-4xl font-bold">Menu List</p>
+        </div>
+        <NotificationBar />
+      </div>
+      <div className="w-full rounded-3xl bg-white p-8 mt-12">
+      <div className="flex justify-between">
+        <p className="font-semibold text-slate-600">All Menus</p>
+        <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder} />
+      </div>
+      <MenuTable menus={menus} sortOrder={sortOrder}/> 
+      </div>
+    </div>
+  );
+}
+
+const SortOptions = ({ sortOrder, setSortOrder }) => {
+  return (
+    <div className="flex justify-end mb-4">
+      <select
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+        className="p-1 rounded border"
+      >
+        <option value="oldest">Earliest</option>
+        <option value="newest">Latest</option>
+      </select>
+    </div>
+  );
+};
+
+const sortMenus = (menus, sortOrder) => {
+  if (sortOrder === 'newest') {
+    return [...menus].reverse();
+  }
+  return menus;
+};
+
+export function MenuTable({ menus, sortOrder }){
+  // const [menus, setMenus] = useState([]);
+  const sortedMenus = sortMenus(menus, sortOrder);
+  const [error, setError]= useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const menusPerPage = 8;
+
+  // useEffect(() => {
+  //   const getMenus = async () => {
+  //     try {
+  //       const response = await axiosInstance.get('/api/menus/');
+  //       setMenus(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       setError('Failed to fecth menus')
+  //     }
+  //   };
+  //   getMenus();
+  // }, []);
+  const totalPages = Math.ceil(sortedMenus.length / menusPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const currentMenus = menus.slice(
+  const currentMenus = sortedMenus.slice(
     (currentPage - 1) * menusPerPage,
     currentPage * menusPerPage
   );

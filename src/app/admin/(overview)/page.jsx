@@ -13,15 +13,32 @@ import RecentActivity from "@/app/ui/admin/recent-activity";
 import AdminLineChart from "@/app/ui/admin/line-chart";
 
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axiosInstance from "@/app/utils/axios";
 
 export default function Page() {
   const [date, setDate] = useState(new Date());
+  const[user, setUser] = useState([])
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+        try {
+            const response = await axiosInstance.get('/api/user/');
+            setUser(response.data);
+        } catch (error) {
+            console.error('Failed to fetch user details:', error);
+            // Handle the error (e.g., redirect to login)
+        }
+    };
+
+    fetchUserDetails();
+}, []);
+
   return (
     <div>
       <div className="flex justify-between">
         <div>
-          <p className="text-slate-500 text-sm font-bold">Hi Simon,</p>
+          <p className="text-slate-500 text-sm font-bold">Hi {user.first_name},</p>
           <p className="text-indigo-900 text-4xl font-bold">Welcome Back!</p>
         </div>
         <NotificationBar />
