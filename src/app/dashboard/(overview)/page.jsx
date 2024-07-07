@@ -1,30 +1,93 @@
+'use client'
 import NotificationBar from "@/app/ui/notification-bar";
+import MenuCreateForm from "@/app/ui/user/menu-create-form";
+import axiosInstance from "@/app/utils/axios";
+import { useEffect, useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import { FaFolderPlus } from "react-icons/fa6";
 
 export default function Page() {
+  const[user, setUser] = useState([])
+  const [greeting, setGreeting] = useState("");
+
+  const getGreeting = () => {
+    const currentHour = new Date().getHours();
+    
+    if (currentHour < 12) {
+      return "Good Morning";
+    } else if (currentHour < 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
+    }
+  };
+
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+        try {
+            const response = await axiosInstance.get('/api/user/');
+            setUser(response.data);
+            setGreeting(getGreeting());
+        } catch (error) {
+            console.error('Failed to fetch user details:', error);
+            // Handle the error (e.g., redirect to login)
+        }
+    };
+
+    fetchUserDetails();
+}, []);
+
   return (
     <div>
       <div className="flex justify-between">
         <div>
-          <p className="text-slate-500 text-sm font-bold">Hi User,</p>
-          <p className="text-indigo-900 text-4xl font-bold">Good Morning!</p>
+          <p className="text-slate-500 text-sm font-bold ml-1">Hi {user.first_name},</p>
+          <p className="text-indigo-900 text-4xl font-bold">{greeting}!</p>
         </div>
         <NotificationBar />
       </div>
-      <div className="text-slate-600 text-2xl font-semibold mt-4">USSD Flows</div>
+      <div className="text-slate-600 text-2xl font-semibold mt-4">
+        Flows
+      </div>
 
-      <div className=" flex justify-between items-center mt-2">
+      <div className="w-full flex justify-between items-center">
         <select className="select select-xs select-bordered w-1/6 max-w-xs">
-          <option selected>
-            View All
-          </option>
+          <option value>View All</option>
           <option>Live</option>
           <option>Production</option>
         </select>
-        <button className="flex items-center justify-center p-2 bg-blue-700 rounded-md h-8 w-24 text-white">
-          Create<CiSquarePlus size={24} />
-        </button>
+        <div>
+
+        <div className="drawer drawer-end">
+          <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content">
+            {/* Page content here */}
+            <label
+              htmlFor="my-drawer-4"
+              className="drawer-button btn btn-primary bg-blue-700 text-white"
+            >
+              Create <CiSquarePlus size={24} />
+            </label>
+          </div>
+          <div className="drawer-side">
+            <label
+              htmlFor="my-drawer-4"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <div className="menu bg-white text-base-content min-h-full w-2/6 p-4">
+              {/* Sidebar content here */}
+              <MenuCreateForm />
+            </div>
+          </div>
+        </div>
+
+        {/* <button className="flex items-center justify-center p-2 bg-blue-700 rounded-md h-8 w-24 text-white">
+          Create
+          <CiSquarePlus size={24} />
+        </button> */}
+        </div>
       </div>
 
       <div className="bg-blue-50 w-full flex justify-around text-slate-600 mt-4">
@@ -34,11 +97,11 @@ export default function Page() {
       </div>
 
       <div className="mt-20 flex justify-center">
-        <div className="h-80 w-80 bg-blue-50 rounded-full text-slate-500 flex flex-col justify-center items-center">
-            <FaFolderPlus size={72} />
+        <div className="h-80 w-80 bg-blue-50 rounded-full text-slate-500 flex flex-col justify-center items-center p-4">
+          <FaFolderPlus size={72} />
           <div className="text-center">
-            <p className="text-lg font-bold ">No menus to show yet</p>
-            <p className="text-sm font-semibold">
+            <p className="text-md font-bold ">No menus to show yet</p>
+            <p className="text-xs font-semibold">
               Use the <span className="text-blue-700">'Create +'</span> button
               to add a new menu
             </p>

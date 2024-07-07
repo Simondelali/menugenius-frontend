@@ -2,7 +2,7 @@
 
 import { HiOutlineUsers } from "react-icons/hi2";
 import { BiCategory } from "react-icons/bi";
-import { TiFlowChildren } from "react-icons/ti";
+import { TiFlowChildren, TiFlowSwitch } from "react-icons/ti";
 import { GoStack } from "react-icons/go";
 import { CiSettings } from "react-icons/ci";
 import { RiLogoutCircleRLine } from "react-icons/ri";
@@ -95,7 +95,7 @@ const links = [
   {
     name: "USSD flows",
     href: "/dashboard",
-    icon: BiCategory,
+    icon: TiFlowSwitch,
   },
   {
     name: "Responses",

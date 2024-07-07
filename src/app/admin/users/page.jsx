@@ -4,30 +4,9 @@ import axiosInstance from "@/app/utils/axios";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  return (
-    <div>
-      <div className="flex justify-between mb-4">
-        <div>
-          <p className="text-indigo-900 text-4xl font-bold">User List</p>
-        </div>
-        <NotificationBar />
-      </div>
-      <div className="w-full rounded-3xl bg-white p-8 mt-12">
-      <div className="flex justify-between">
-        <p className="font-semibold">All Users</p>
-        <div>sort by</div>
-      </div>
-      <UserTable /> 
-      </div>
-    </div>
-  );
-}
-
-export function UserTable(){
   const [users, setUsers] = useState([]);
-  const [error, setError]= useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 8;
+  const [sortOrder, setSortOrder] = useState('oldest');
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -39,13 +18,61 @@ export function UserTable(){
     };
     getUsers();
   }, []);
-  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  return (
+    <div>
+      <div className="flex justify-between mb-4">
+        <div>
+          <p className="text-indigo-900 text-4xl font-bold">User List</p>
+        </div>
+        <NotificationBar />
+      </div>
+      <div className="w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
+      <div className="flex justify-between">
+        <p className="font-semibold text-slate-600">All Users</p>
+        <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder} />
+      </div>
+      <UserTable users={users} sortOrder={sortOrder}/> 
+      </div>
+    </div>
+  );
+}
+
+const SortOptions = ({ sortOrder, setSortOrder }) => {
+  return (
+    <div className="flex justify-end mb-4">
+      <select
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+        className="p-1 rounded border"
+      >
+        <option value="oldest">Earliest</option>
+        <option value="newest">Latest</option>
+      </select>
+    </div>
+  );
+};
+
+const sortUsers = (users, sortOrder) => {
+  if (sortOrder === 'newest') {
+    return [...users].reverse();
+  }
+  return users;
+};
+
+
+export function UserTable({ users, sortOrder }){
+  const sortedUsers = sortUsers(users, sortOrder);
+  const [error, setError]= useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 8;
+  const totalPages = Math.ceil(sortedUsers.length / usersPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const currentUsers = users.slice(
+  const currentUsers = sortedUsers.slice(
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
   );
