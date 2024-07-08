@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const [users, setUsers] = useState([]);
   const [sortOrder, setSortOrder] = useState('oldest');
+  const [error, setError]= useState('');
 
   useEffect(() => {
     const getUsers = async () => {
@@ -27,12 +28,12 @@ export default function Page() {
         </div>
         <NotificationBar />
       </div>
-      <div className="w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
+      <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
       <div className="flex justify-between">
         <p className="font-semibold text-slate-600">All Users</p>
         <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder} />
       </div>
-      <UserTable users={users} sortOrder={sortOrder}/> 
+      <UserTable users={users} sortOrder={sortOrder} error={error}/> 
       </div>
     </div>
   );
@@ -61,9 +62,9 @@ const sortUsers = (users, sortOrder) => {
 };
 
 
-export function UserTable({ users, sortOrder }){
+export function UserTable({ users, sortOrder, error }){
   const sortedUsers = sortUsers(users, sortOrder);
-  const [error, setError]= useState('');
+  // const [error, setError]= useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 8;
   const totalPages = Math.ceil(sortedUsers.length / usersPerPage);
@@ -105,7 +106,7 @@ export function UserTable({ users, sortOrder }){
         ))}
       </tbody>
     </table>
-    <div className="mt-4 flex justify-end">
+    <div className="mt-4 flex justify-end absolute bottom-5 right-5">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}

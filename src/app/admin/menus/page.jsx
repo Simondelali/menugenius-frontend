@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const [menus, setMenus] = useState([]);
   const [sortOrder, setSortOrder] = useState('oldest');
+  const [error, setError]= useState('');
 
   useEffect(() => {
     const getMenus = async () => {
@@ -28,12 +29,12 @@ export default function Page() {
         </div>
         <NotificationBar />
       </div>
-      <div className="w-full rounded-3xl bg-white p-8 mt-12">
+      <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
       <div className="flex justify-between">
         <p className="font-semibold text-slate-600">All Menus</p>
         <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder} />
       </div>
-      <MenuTable menus={menus} sortOrder={sortOrder}/> 
+      <MenuTable menus={menus} sortOrder={sortOrder} error={error}/> 
       </div>
     </div>
   );
@@ -61,25 +62,13 @@ const sortMenus = (menus, sortOrder) => {
   return menus;
 };
 
-export function MenuTable({ menus, sortOrder }){
+export function MenuTable({ menus, sortOrder, error }){
   // const [menus, setMenus] = useState([]);
   const sortedMenus = sortMenus(menus, sortOrder);
-  const [error, setError]= useState('');
+  // const [error, setError]= useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const menusPerPage = 8;
 
-  // useEffect(() => {
-  //   const getMenus = async () => {
-  //     try {
-  //       const response = await axiosInstance.get('/api/menus/');
-  //       setMenus(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       setError('Failed to fecth menus')
-  //     }
-  //   };
-  //   getMenus();
-  // }, []);
   const totalPages = Math.ceil(sortedMenus.length / menusPerPage);
 
   const handlePageChange = (page) => {
@@ -121,7 +110,7 @@ export function MenuTable({ menus, sortOrder }){
         ))}
       </tbody>
     </table>
-    <div className="mt-4 flex justify-end">
+    <div className="mt-4 flex justify-end absolute bottom-5 right-5">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
