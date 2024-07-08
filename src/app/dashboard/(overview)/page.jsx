@@ -1,10 +1,11 @@
 'use client'
 import NotificationBar from "@/app/ui/notification-bar";
 import MenuCreateForm from "@/app/ui/user/menu-create-form";
+import UserMenuTable from "@/app/ui/user/menu-table";
 import axiosInstance from "@/app/utils/axios";
 import { useEffect, useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
-import { FaFolderPlus } from "react-icons/fa6";
+
 
 export default function Page() {
   const[user, setUser] = useState([])
@@ -59,7 +60,7 @@ export default function Page() {
         </select>
         <div>
 
-        <div className="drawer drawer-end">
+        <div className="drawer drawer-end z-10">
           <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
             {/* Page content here */}
@@ -90,24 +91,12 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="bg-blue-50 w-full flex justify-around text-slate-600 mt-4">
+      <div className="bg-blue-50 w-full flex justify-around text-slate-600 mt-4 mb-2 font-semibold">
         <div>Name</div>
-        <div>Status</div>
+        <div className="">Status</div>
         <div>Description</div>
       </div>
-
-      <div className="mt-20 flex justify-center">
-        <div className="h-80 w-80 bg-blue-50 rounded-full text-slate-500 flex flex-col justify-center items-center p-4">
-          <FaFolderPlus size={72} />
-          <div className="text-center">
-            <p className="text-md font-bold ">No menus to show yet</p>
-            <p className="text-xs font-semibold">
-              Use the <span className="text-blue-700">'Create +'</span> button
-              to add a new menu
-            </p>
-          </div>
-        </div>
-      </div>
+      <UserMenuTable />
     </div>
   );
 }
