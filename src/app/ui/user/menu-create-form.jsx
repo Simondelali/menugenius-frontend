@@ -8,7 +8,7 @@ export default function MenuCreateForm() {
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [menuId, setMenuId] = useState(0);
+  // const [menuId, setMenuId] = useState(0);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -21,12 +21,11 @@ export default function MenuCreateForm() {
         description: description,
       });
       if (response.status === 201) {
-          setSuccess("Menu created succesfully");
-          // Redirect or perform additional actions here
-          router.push("/dashboard");
-        }
-        setMenuId(response.data.id);
+        setSuccess("Menu created succesfully");
+        const menuId = response.data.id;
         console.log(menuId);
+        // router.push(`dashboard/flow/${menuId}/`);
+      }
     } catch (error) {
       if (error.response.status === 401) {
         setError("Error creating menu, Try again Later");

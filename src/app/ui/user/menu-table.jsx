@@ -1,4 +1,5 @@
 import axiosInstance from "@/app/utils/axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaFolderPlus } from "react-icons/fa6";
 
@@ -37,27 +38,43 @@ export default function UserMenuTable() {
       </div>
     );
   }
-  
+
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto mt-4 mb-2">
       <table className="table">
         {/* head */}
-        {/* <thead>
-        <tr>
-          <th></th>
-          <th>Email</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Date Joined</th>
-        </tr>
-      </thead> */}
+        <thead className="bg-blue-50">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th className="w-3/6">Description</th>
+          </tr>
+        </thead>
+
         <tbody>
           {userMenus.map((userMenu, index) => (
             <tr className="hover:bg-gray-50" key={userMenu.id}>
               <th>{index + 1}</th>
-              <td className="w-2/6 ">{userMenu.name}</td>
-              <td className="1/6 text-end">draft</td>
-              <td className="w-3/6 text-center">description </td>
+              <td>
+                <Link href={`/dashboard/flow/${userMenu.id}`}>
+                  <div className="block">{userMenu.name}</div>
+                </Link>
+              </td>
+              <td>
+                <Link href={`/dashboard/flow/${userMenu.id}`}>
+                  <div className="block">
+                    <div className="w-20 h-7 m-2 bg-teal-500 bg-opacity-40 rounded border border-emerald-500 flex items-center justify-center">
+                      Draft
+                    </div>
+                  </div>
+                </Link>
+              </td>
+              <td>
+                <Link href={`/dashboard/flow/${userMenu.id}`}>
+                  <div className="block">{userMenu.description}</div>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

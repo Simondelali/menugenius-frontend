@@ -43,13 +43,13 @@ export default function Page() {
     <div>
       <div className="flex justify-between">
         <div>
-          <p className="text-slate-500 text-sm font-bold ml-1">Hi {user.first_name},</p>
+          <p className="text-slate-500 text-sm font-bold">Hi {user.first_name},</p>
           <p className="text-indigo-900 text-4xl font-bold">{greeting}!</p>
         </div>
         <NotificationBar />
       </div>
-      <div className="text-slate-600 text-2xl font-semibold mt-4">
-        Flows
+      <div className="text-slate-600 text-xl font-semibold mt-4">
+        My Flows
       </div>
 
       <div className="w-full flex justify-between items-center">
@@ -91,11 +91,6 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="bg-blue-50 w-full flex justify-around text-slate-600 mt-4 mb-2 font-semibold">
-        <div>Name</div>
-        <div className="">Status</div>
-        <div>Description</div>
-      </div>
       <UserMenuTable />
     </div>
   );
