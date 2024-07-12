@@ -2,11 +2,11 @@
 import NotificationBar from "@/app/ui/notification-bar";
 import UserMenuTable from "@/app/ui/user/menu-table";
 import axiosInstance from "@/app/utils/axios";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Responses() {
   const [user, setUser] = useState([]);
-  // const [greeting, setGreeting] = useState("");
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();

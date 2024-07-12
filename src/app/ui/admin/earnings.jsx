@@ -13,7 +13,7 @@ export default function EarningsCard(){
         </div>
         <div>
             <p className="text-slate-400 text-sm font-medium ">Earnings</p>
-            <p className="text-indigo-900 text-2xl font-bold">$128.50</p>
+            <p className="text-indigo-900 text-2xl font-bold">₵128.50</p>
         </div>
     </div>
 )
