@@ -8,8 +8,7 @@ import { CiSquarePlus } from "react-icons/ci";
 
 
 export default function Page() {
-  const[user, setUser] = useState([])
-  const [greeting, setGreeting] = useState("");
+  const[user, setUser] = useState([]);
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();
@@ -29,7 +28,6 @@ export default function Page() {
         try {
             const response = await axiosInstance.get('/api/user/');
             setUser(response.data);
-            setGreeting(getGreeting());
         } catch (error) {
             console.error('Failed to fetch user details:', error);
             // Handle the error (e.g., redirect to login)
@@ -44,7 +42,7 @@ export default function Page() {
       <div className="flex justify-between">
         <div>
           <p className="text-slate-500 text-sm font-bold">Hi {user.first_name},</p>
-          <p className="text-indigo-900 text-4xl font-bold">{greeting}!</p>
+          <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>

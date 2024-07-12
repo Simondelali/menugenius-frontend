@@ -1,11 +1,21 @@
 import axiosInstance from "@/app/utils/axios";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaFolderPlus } from "react-icons/fa6";
 
 export default function UserMenuTable() {
   const [userMenus, setUserMenus] = useState([]);
   const [error, setError] = useState("");
+  const pathname = usePathname();
+
+  const getHref = (id) => {
+    if (pathname === '/dashboard') {
+      return `/dashboard/flow/${id}`;
+    } else if (pathname === '/dashboard/responses') {
+      return `/dashboard/responses/${id}`;
+    }
+  };
 
   useEffect(() => {
     const fetchUserMenus = async () => {
@@ -54,24 +64,24 @@ export default function UserMenuTable() {
 
         <tbody>
           {userMenus.map((userMenu, index) => (
-            <tr className="hover:bg-gray-50" key={userMenu.id}>
+            <tr className="hover:bg-gray-100" key={userMenu.id}>
               <th>{index + 1}</th>
               <td>
-                <Link href={`/dashboard/flow/${userMenu.id}`}>
+                <Link href={getHref(userMenu.id)}>
                   <div className="block">{userMenu.name}</div>
                 </Link>
               </td>
               <td>
-                <Link href={`/dashboard/flow/${userMenu.id}`}>
+                <Link href={getHref(userMenu.id)}>
                   <div className="block">
-                    <div className="w-20 h-7 m-2 bg-teal-500 bg-opacity-40 rounded border border-emerald-500 flex items-center justify-center">
+                    <div className="w-20 h-7 bg-teal-500 bg-opacity-40 rounded border border-emerald-500 flex items-center justify-center">
                       Draft
                     </div>
                   </div>
                 </Link>
               </td>
               <td>
-                <Link href={`/dashboard/flow/${userMenu.id}`}>
+                <Link href={getHref(userMenu.id)}>
                   <div className="block">{userMenu.description}</div>
                 </Link>
               </td>
