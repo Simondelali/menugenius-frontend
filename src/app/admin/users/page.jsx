@@ -1,6 +1,7 @@
 'use client'
 import NotificationBar from "@/app/ui/notification-bar";
 import axiosInstance from "@/app/utils/axios";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -101,7 +102,7 @@ export function UserTable({ users, sortOrder, error }){
           <td>{user.email}</td>
           <td>{user.first_name}</td>
           <td>{user.last_name}</td>
-          <td>{user.date_joined}</td>
+          <td>{format(new Date(user.date_joined), 'MMMM dd, yyyy h:mm a')}</td>
         </tr>
         ))}
       </tbody>

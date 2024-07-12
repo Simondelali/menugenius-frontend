@@ -99,7 +99,7 @@ const links = [
   },
   {
     name: "Responses",
-    href: "/admin/users",
+    href: "/dashboard/responses",
     icon: HiOutlineUsers,
   },
   // {
@@ -107,8 +107,8 @@ const links = [
   //   href: "/admin/menus",
   //   icon: TiFlowChildren,
   // },
-  { name: "Templates", href: "/admin/templates", icon: GoStack },
-  { name: "Settings", href: "/admin/settings", icon: CiSettings },
+  { name: "Templates", href: "/", icon: GoStack },
+  { name: "Settings", href: "/", icon: CiSettings },
 ];
 
 export function NavLinks() {
