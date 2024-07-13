@@ -34,17 +34,24 @@ export default function Page() {
       </div>
 
       <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
-        <div className="flex justify-between">
-          <p className="font-semibold text-slate-600">All Users</p>
-          <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder} />
-          <CSVLink
-            data={sortUsers(users, sortOrder)}
-            filename={"MG Users List.csv"}
-            className="btn btn-primary"
-            target="_blank"
-          >
-            Export to csv
-          </CSVLink>
+        <div className="flex justify-between mb-4">
+          <div>
+            <p className="font-semibold text-slate-600 text-lg">All Users</p>
+          </div>
+          <div className="flex ">
+            <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder}/>
+            <CSVLink
+              data={sortUsers(users, sortOrder)}
+              filename={"MG Users List.csv"}
+              className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md 
+            hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 
+              transition duration-200"
+              target="_blank"
+            >
+              <CiExport className="inline-block mr-2" size={24} />
+              Export to csv
+            </CSVLink>
+          </div>
         </div>
         <UserTable users={users} sortOrder={sortOrder} error={error} />
       </div>
@@ -54,11 +61,11 @@ export default function Page() {
 
 const SortOptions = ({ sortOrder, setSortOrder }) => {
   return (
-    <div className="flex justify-end mb-4">
+    <div className="flex mr-2">
       <select
         value={sortOrder}
         onChange={(e) => setSortOrder(e.target.value)}
-        className="p-1 rounded border"
+        className="p-1 rounded bg-gray-200"
       >
         <option value="oldest">Earliest</option>
         <option value="newest">Latest</option>
