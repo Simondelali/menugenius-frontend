@@ -1,19 +1,26 @@
-'use client'
+"use client";
 import SessionTable from "@/app/ui/user/session-table";
 import axiosInstance from "@/app/utils/axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CSVLink } from 'react-csv';
-import { startOfDay, startOfWeek, endOfWeek, isWithinInterval, parseISO } from 'date-fns';
+import { CSVLink } from "react-csv";
+import {
+  startOfDay,
+  startOfWeek,
+  endOfWeek,
+  isWithinInterval,
+  parseISO,
+} from "date-fns";
 import NotificationBar from "@/app/ui/notification-bar";
+import { CiExport } from "react-icons/ci";
 
 export default function Page() {
-  const[user, setUser] = useState([]);
-  const { id: menuId }= useParams();
+  const [user, setUser] = useState([]);
+  const { id: menuId } = useParams();
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();
-    
+
     if (currentHour < 12) {
       return "Good Morning";
     } else if (currentHour < 18) {
@@ -23,33 +30,34 @@ export default function Page() {
     }
   };
 
-
   useEffect(() => {
     const fetchUserDetails = async () => {
-        try {
-            const response = await axiosInstance.get('/api/user/');
-            setUser(response.data);
-        } catch (error) {
-            console.error('Failed to fetch user details:', error);
-        }
+      try {
+        const response = await axiosInstance.get("/api/user/");
+        setUser(response.data);
+      } catch (error) {
+        console.error("Failed to fetch user details:", error);
+      }
     };
 
     fetchUserDetails();
-}, []);
+  }, []);
 
   return (
     <div>
       <div className="flex justify-between">
         <div>
-          <p className="text-slate-500 text-sm font-bold">Hi {user.first_name},</p>
+          <p className="text-slate-500 text-sm font-bold">
+            Hi {user.first_name},
+          </p>
           <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>
-      <MenuName menuId={menuId}/>
+      {/* <MenuName menuId={menuId}/> */}
       <SessionResponseTable />
-      </div>
-  )
+    </div>
+  );
 }
 
 export function SessionResponseTable() {
@@ -61,7 +69,9 @@ export function SessionResponseTable() {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await axiosInstance.get(`/api/sessions/${parseInt(menuId)}`);
+        const response = await axiosInstance.get(
+          `/api/sessions/${parseInt(menuId)}`
+        );
         setSessionData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -77,74 +87,90 @@ export function SessionResponseTable() {
       setLoading(false);
     }
   }, [menuId]);
-  
-  
-  return <div>
-    <ExportCSV sessionData={sessionData}/>
-    <div className="relative h-[75vh]">
-    <SessionTable sessionData={sessionData} error={error}/>
+
+  return (
+    <div>
+      <ExportCSV sessionData={sessionData} menuId={menuId} />
+      <div className="relative h-[65vh]">
+        <SessionTable sessionData={sessionData} error={error} />
+      </div>
     </div>
-  </div>;
+  );
 }
 
-export function ExportCSV({ sessionData }) {
-  const [filterOption, setFilterOption] = useState('all');
+export function ExportCSV({ sessionData, menuId }) {
+  const [filterOption, setFilterOption] = useState("all");
 
   const filterData = () => {
     const now = new Date();
     let filteredData = sessionData;
 
-    if (filterOption === 'today') {
+    if (filterOption === "today") {
       const start = startOfDay(now);
       const end = new Date();
-      filteredData = sessionData.filter(item => 
+      filteredData = sessionData.filter((item) =>
         isWithinInterval(parseISO(item.date), { start, end })
       );
-    } else if (filterOption === 'this_week') {
-      const start = startOfWeek(now, { weekStartsOn: 1 }); 
+    } else if (filterOption === "this_week") {
+      const start = startOfWeek(now, { weekStartsOn: 1 });
       const end = endOfWeek(now, { weekStartsOn: 1 });
-      filteredData = sessionData.filter(item => 
+      filteredData = sessionData.filter((item) =>
         isWithinInterval(parseISO(item.date), { start, end })
       );
     }
 
     return filteredData;
   };
-  return(
-<div>
-      <select onChange={e => setFilterOption(e.target.value)} value={filterOption}>
-        <option value="all">All Data</option>
-        <option value="today">Today</option>
-        <option value="this_week">This Week</option>
-      </select>
-      <CSVLink
-        data={filterData()}
-        filename={`sessiondata_${filterOption}.csv`}
-        className="btn btn-primary"
-        target="_blank"
+  return (
+    <div className="flex justify-between items-center mt-6">
+      <MenuName menuId={menuId} />
+      <div className="flex">
+        <select
+          onChange={(e) => setFilterOption(e.target.value)}
+          value={filterOption}
+          className="bg-gray-200 rounded-md mr-2 p-1"
         >
-        Export to CSV
-      </CSVLink>
+          <option value="all">All Sessions</option>
+          <option value="today">Today</option>
+          <option value="this_week">This Week</option>
+        </select>
+        <CSVLink
+          data={filterData()}
+          filename={`sessiondata_${filterOption}.csv`}
+          className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md 
+        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 
+        transition duration-200"
+          target="_blank"
+        >
+          <CiExport className="inline-block mr-2" size={24} />
+          Export to CSV
+        </CSVLink>
+      </div>
     </div>
-  )
+  );
 }
 
-export function MenuName({menuId}){
+export function MenuName({ menuId }) {
   const [menu, setMenu] = useState({});
 
   useEffect(() => {
     const fetchMenuDetails = async () => {
-        try {
-            const response = await axiosInstance.get(`/api/menu/${parseInt(menuId)}/`);
-            setMenu(response.data);
-        } catch (error) {
-            console.error('Failed to fetch Menu details:', error);
-        }
+      try {
+        const response = await axiosInstance.get(
+          `/api/menu/${parseInt(menuId)}/`
+        );
+        setMenu(response.data);
+      } catch (error) {
+        console.error("Failed to fetch Menu details:", error);
+      }
     };
 
     fetchMenuDetails();
-}, []);
+  }, []);
 
-  return <div className="text-slate-600 text-xl font-semibold mt-4 mb-4">
-  Session Response for {menu.name}</div>
+  return (
+    <div className="text-slate-600 text-xl font-semibold mt-4 mb-4">
+      Session Response for {menu.name}
+    </div>
+  );
 }

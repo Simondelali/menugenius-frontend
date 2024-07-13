@@ -23,7 +23,7 @@ export default function SessionTable({ sessionData, error }) {
 
   return (
     <>
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto mt-4">
       <table className="table">
         {/* head */}
         <thead className="bg-blue-50">
