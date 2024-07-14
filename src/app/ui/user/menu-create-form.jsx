@@ -24,7 +24,7 @@ export default function MenuCreateForm() {
         setSuccess("Menu created succesfully");
         const menuId = response.data.id;
         console.log(menuId);
-        // router.push(`dashboard/flow/${menuId}/`);
+        router.push(`dashboard/flow/${menuId}/`);
       }
     } catch (error) {
       if (error.response.status === 401) {
