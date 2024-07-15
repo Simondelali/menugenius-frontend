@@ -66,7 +66,7 @@ export default function Page() {
               htmlFor="my-drawer-4"
               className="drawer-button btn btn-primary bg-blue-700 text-white"
             >
-              Create <CiSquarePlus size={24} />
+              Create new<CiSquarePlus size={24} />
             </label>
           </div>
           <div className="drawer-side">

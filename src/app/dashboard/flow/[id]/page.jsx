@@ -1,152 +1,190 @@
-// 'use client'
-// import axiosInstance from '@/app/utils/axios'
-// import { useRouter, useParams } from 'next/navigation'
-// import { useEffect, useState } from 'react'
-
-// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
-// export default function Flow() {
-//   const router = useRouter()
-//   const { id: menuId } = useParams();
-//   const [menu, setMenu] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState("");
-
-//   useEffect(() => {
-//     console.log("Params:", { menuId });
-//     if (menuId) {
-//       // setMenuId(params.id)
-//       const fetchMenu = async () => {
-//         try {
-//           console.log("Fetching menu for ID:", menuId);
-//           const response = await axiosInstance.get(`/api/menu/${menuId}`);
-//           console.log("API response:", response);
-//           setMenu(response.data);
-//         } catch (error) {
-//           console.error('Error fetching menu:', error);
-//           setError(`Error fetching menu: ${error.message}`);
-//         } finally {
-//           setLoading(false);
-//         }
-//       };
-
-//       fetchMenu();
-//     } else {
-//       console.log("No menuId in params");
-//       setLoading(false);
-//     }
-//   }, [menuId])
-
-//   if (loading) {
-//     return <div>Loading...</div>
-//   }
-
-//   if (error) {
-//     return <div>Error: {error}</div>
-//   }
-
-//   return (
-//     <div>
-//       <h1>Flow for Menu ID: {menuId}</h1>
-//       {menu ? (
-//         <h2 className="text-2xl font-bold mb-4">Menu: {menu.name}</h2>
-//       ) : (
-//         <p>No menu data available</p>
-//       )}
-//       {/* Add your flow content here */}
-
-//     </div>
-//   )
-// }
-
 'use client'
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import axiosInstance from '@/app/utils/axios';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function Flow() {
   const router = useRouter();
   const { id: menuId } = useParams();
-  const [menu, setMenu] = useState(null);
   const [menuOptions, setMenuOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [newOption, setNewOption] = useState({ name: '', value: '', expects_input: false });
+  const [editingOption, setEditingOption] = useState(null);
 
   useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const response = await axiosInstance.get(`/api/menu-options/${parseInt(menuId)}`);
-        // setMenu(response.data);
-        setMenuOptions(response.data);  // assuming options are nested under menu
-        console.log(response.data);
-      } catch (error) {
-        setError(`Error fetching menu: ${error.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (menuId) {
-      fetchMenu();
-    } else {
-      setLoading(false);
-    }
+    fetchMenuOptions();
   }, [menuId]);
 
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-    const items = Array.from(menuOptions);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setMenuOptions(items);
+  const fetchMenuOptions = async () => {
+    try {
+      const response = await axiosInstance.get(`/api/menu-options/${parseInt(menuId)}`);
+      console.log("Fetched menu options:", response.data);
+      setMenuOptions(response.data);
+    } catch (error) {
+      setError(`Error fetching menu options: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const createMenuOption = async (parentId = null) => {
+    try {
+      await axiosInstance.post(`/api/create-menu-option/${menuId}/`, {
+        ...newOption,
+        parent_option: parentId,
+        menu: menuId
+      });
+      fetchMenuOptions();
+      setNewOption({ name: '', value: '', expects_input: false });
+    } catch (error) {
+      setError(`Error creating menu option: ${error.message}`);
+    }
+  };
+
+  const updateMenuOption = async (optionId) => {
+    try {
+      await axiosInstance.put(`/api/edit-menu-option/${menuId}/${optionId}/`, editingOption);
+      fetchMenuOptions();
+      setEditingOption(null);
+    } catch (error) {
+      setError(`Error updating menu option: ${error.message}`);
+    }
+  };
+
+  const deleteMenuOption = async (optionId) => {
+    try {
+      await axiosInstance.delete(`/api/delete-menu-option/${menuId}/${optionId}/`);
+      fetchMenuOptions();
+    } catch (error) {
+      setError(`Error deleting menu option: ${error.message}`);
+    }
+  };
+
+  const renderMenuOptions = (options, parentId = null, level = 0) => {
+    return options
+      .filter(option => option.parent_option === parentId)
+      .map(option => (
+        <div key={option.id} className={`mb-4 ${level > 0 ? 'ml-6' : ''}`}>
+          <div className="bg-white shadow-md rounded-lg p-4 border-l-4 border-blue-500">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <span className="font-semibold text-lg">{option.name}</span>
+                <span className="ml-2 text-sm text-gray-500">({option.value})</span>
+              </div>
+              <div>
+                {option.expects_input && (
+                  <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                    Expects Input
+                  </span>
+                )}
+                <button 
+                  onClick={() => setEditingOption(option)} 
+                  className="text-blue-500 hover:text-blue-700 mr-2"
+                >
+                  Edit
+                </button>
+                <button 
+                  onClick={() => deleteMenuOption(option.id)} 
+                  className="text-red-500 hover:text-red-700"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            {renderMenuOptions(options, option.id, level + 1)}
+            <button
+              onClick={() => createMenuOption(option.id)}
+              className="mt-2 bg-green-500 hover:bg-green-600 text-white text-sm px-3 py-1 rounded transition duration-300"
+            >
+              Add Sub-Option
+            </button>
+          </div>
+        </div>
+      ));
+  };
+
+  if (loading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  if (error) return <div className="text-red-500 text-center">{error}</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-2xl font-bold mb-4">Flow for Menu ID: {menuId}</h1>
-      {menu ? (
-        <h2 className="text-xl mb-4">Menu: menu.name</h2>
-      ) : (
-        <p>No menu data available</p>
-      )}
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="menuOptions">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="w-96 h-96 relative"
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Menu Options</h1>
+      
+      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h2 className="text-xl font-semibold mb-4">Add New Option</h2>
+        <div className="flex flex-wrap items-center space-x-4">
+          <input
+            type="text"
+            placeholder="Name"
+            value={newOption.name}
+            onChange={(e) => setNewOption({...newOption, name: e.target.value})}
+            className="border rounded p-2 flex-grow"
+          />
+          <input
+            type="text"
+            placeholder="Value"
+            value={newOption.value}
+            onChange={(e) => setNewOption({...newOption, value: e.target.value})}
+            className="border rounded p-2 flex-grow"
+          />
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              checked={newOption.expects_input}
+              onChange={(e) => setNewOption({...newOption, expects_input: e.target.checked})}
+              className="mr-2"
+            />
+            Expects Input
+          </label>
+          <button
+            onClick={() => createMenuOption()}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-300"
+          >
+            Add Option
+          </button>
+        </div>
+      </div>
+
+      {editingOption && (
+        <div className="bg-yellow-50 shadow-md rounded-lg p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4">Edit Option</h2>
+          <div className="flex flex-wrap items-center space-x-4">
+            <input
+              type="text"
+              value={editingOption.name}
+              onChange={(e) => setEditingOption({...editingOption, name: e.target.value})}
+              className="border rounded p-2 flex-grow"
+            />
+            <input
+              type="text"
+              value={editingOption.value}
+              onChange={(e) => setEditingOption({...editingOption, value: e.target.value})}
+              className="border rounded p-2 flex-grow"
+            />
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={editingOption.expects_input}
+                onChange={(e) => setEditingOption({...editingOption, expects_input: e.target.checked})}
+                className="mr-2"
+              />
+              Expects Input
+            </label>
+            <button
+              onClick={() => updateMenuOption(editingOption.id)}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition duration-300"
             >
-              {menuOptions.map((option, index) => (
-                <Draggable key={option.id} draggableId={option.id.toString()} index={index}>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className="w-96 h-32 relative mb-4"
-                    >
-                      <div className="w-96 h-32 absolute bg-white shadow-lg p-4">
-                        <div className="flex justify-between">
-                          <div className="text-xl font-normal">{index + 1}. {option.name}</div>
-                          <div className="text-xl font-light">Option</div>
-                        </div>
-                        <div className="border-b my-2"></div>
-                        <div className="text-xl font-light">{option.value || 'No value provided'}</div>
-                      </div>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+              Update Option
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div>
+        <h2 className="text-2xl font-semibold mb-4">Menu Structure</h2>
+        {renderMenuOptions(menuOptions)}
+      </div>
     </div>
   );
 }
