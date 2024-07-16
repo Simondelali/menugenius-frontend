@@ -73,7 +73,7 @@ export function SideNav() {
     <div className="">
       <div className="flex-col items-center inline-flex p-8 gap-2 bg-indigo-950 rounded-xl mt-2 text-slate-200">
         <p className="text-2xl font-bold">MENUGENIUS</p>
-        <p className="text-xs font-medium">DASHBOARD</p>
+        <p className="text-xs font-medium">USER DASHBOARD</p>
       </div>
       <div className=" border border-indigo-100 mt-2 "></div>
 
