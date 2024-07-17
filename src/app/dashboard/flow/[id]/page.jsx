@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import axiosInstance from '@/app/utils/axios';
+import TopNavBar from '@/app/ui/user/flow/top-nav';
 
 export default function Flow() {
   const router = useRouter();
@@ -108,10 +109,11 @@ export default function Flow() {
   if (error) return <div className="text-red-500 text-center">{error}</div>;
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Menu Options</h1>
+    <div className="container mx-auto">
+      <TopNavBar menuId={menuId} menuName="your menu name" />
+      {/* <h1 className="text-3xl font-bold mb-6">Menu Options</h1> */}
       
-      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+      <div className="bg-white shadow-md rounded-lg p-6 mb-6 mt-16">
         <h2 className="text-xl font-semibold mb-4">Add New Option</h2>
         <div className="flex flex-wrap items-center space-x-4">
           <input
@@ -182,7 +184,7 @@ export default function Flow() {
       )}
 
       <div>
-        <h2 className="text-2xl font-semibold mb-4">Menu Structure</h2>
+        <h2 className="text-2xl font-semibold mb-4">Menu Flow</h2>
         {renderMenuOptions(menuOptions)}
       </div>
     </div>
