@@ -1,6 +1,7 @@
 'use client'
 import NotificationBar from "@/app/ui/notification-bar";
 import UserMenuTable from "@/app/ui/user/menu-table";
+import UserResponseMenuTable from "@/app/ui/user/response-menu-table";
 import axiosInstance from "@/app/utils/axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -55,7 +56,7 @@ export default function Responses() {
         </select>
       </div>
 
-      <UserMenuTable />
+      <UserResponseMenuTable />
     </div>
   );
 }

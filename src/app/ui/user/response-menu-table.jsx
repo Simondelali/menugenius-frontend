@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaFolderPlus } from "react-icons/fa6";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 
-export default function UserMenuTable() {
+export default function UserResponseMenuTable() {
   const [userMenus, setUserMenus] = useState([]);
   const [error, setError] = useState("");
   const pathname = usePathname();
@@ -58,8 +58,7 @@ export default function UserMenuTable() {
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
+            <th className="w-3/6">Description</th>
           </tr>
         </thead>
 
@@ -76,20 +75,6 @@ export default function UserMenuTable() {
                 <Link href={getHref(userMenu.id)}>
                   <div className="block">{userMenu.description}</div>
                 </Link>
-              </td>
-              <td>
-                  <div className="flex gap-2 text-slate-700">
-                <Link href="/">
-                    <div>
-                      <HiOutlinePencil size={20}/>
-                    </div>
-                </Link>
-                <Link href="/">
-                    <div>
-                    <HiOutlineTrash size={20}/>
-                    </div>
-                </Link>
-                  </div>
               </td>
             </tr>
           ))}
