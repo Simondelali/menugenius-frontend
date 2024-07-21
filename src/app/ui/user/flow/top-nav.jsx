@@ -22,7 +22,7 @@ const TopNavBar = ({ menuId }) => {
     }, [menuId]);
 
   return (
-    <nav className=" bg-white p-4 mb-6 fixed top-0 right-0 z-10 lg:left-64 left-0">
+    <nav className="bg-white p-4 mb-6 fixed top-0 right-0 z-10 lg:left-64 left-0">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <Link href="/dashboard" className="text-gray-600 hover:text-gray-800">

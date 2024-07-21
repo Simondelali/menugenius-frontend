@@ -8,7 +8,27 @@ import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 export default function UserMenuTable() {
   const [userMenus, setUserMenus] = useState([]);
   const [error, setError] = useState("");
+  const [menuToDelete, setMenuToDelete] = useState(null);
   const pathname = usePathname();
+
+  const handleDelete = async () => {
+    if (menuToDelete) {
+      try {
+        // Perform the deletion API call
+        await axiosInstance.delete(`/api/delete-menu/${menuToDelete.id}/`);
+        
+        // Update the userMenus state
+        setUserMenus(prevMenus => prevMenus.filter(menu => menu.id !== menuToDelete.id));
+        
+        // Close the modal
+        document.getElementById(`modal_${menuToDelete.id}`).close();
+        setMenuToDelete(null);
+      } catch (error) {
+        console.error("Error deleting menu:", error);
+        // Handle error (e.g., show an error message to the user)
+      }
+    }
+  };
 
   const getHref = (id) => {
     if (pathname === '/dashboard') {
@@ -78,18 +98,38 @@ export default function UserMenuTable() {
                 </Link>
               </td>
               <td>
-                  <div className="flex gap-2 text-slate-700">
-                <Link href="/">
-                    <div>
-                      <HiOutlinePencil size={20}/>
+                <div className="flex gap-2 text-slate-700">
+                  <Link href="">
+                    <div className="btn">
+                      <HiOutlinePencil size={20} />
                     </div>
-                </Link>
-                <Link href="/">
-                    <div>
-                    <HiOutlineTrash size={20}/>
-                    </div>
-                </Link>
+                  </Link>
+                  <div>
+                    <button
+                      className="btn"
+                      onClick={() => {
+                        setMenuToDelete(userMenu);
+                        document.getElementById(`modal_${userMenu.id}`).showModal();
+                      }}
+                    >
+                      <HiOutlineTrash size={20} />
+                    </button>
+                    <dialog id={`modal_${userMenu.id}`} className="modal">
+                      <div className="modal-box">
+                        <h3 className="font-bold text-lg">Are you sure you want to delete {userMenu.name}?</h3>
+                        <p className="py-4">
+                          Deleting this menu will erase all data associated with it. This process cannot be undone.
+                        </p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            <button className="btn">Cancel</button>
+                          </form>
+                          <button className="btn bg-red-500" onClick={handleDelete}>Delete</button>
+                        </div>
+                      </div>
+                    </dialog>
                   </div>
+                </div>
               </td>
             </tr>
           ))}
