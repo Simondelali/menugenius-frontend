@@ -4,11 +4,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaFolderPlus } from "react-icons/fa6";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
+import MenuEditForm from "./menu-edit-form";
 
 export default function UserMenuTable() {
   const [userMenus, setUserMenus] = useState([]);
   const [error, setError] = useState("");
   const [menuToDelete, setMenuToDelete] = useState(null);
+  const [menuToEdit, setMenuToEdit] = useState(null);
   const pathname = usePathname();
 
   const handleDelete = async () => {
@@ -28,6 +30,19 @@ export default function UserMenuTable() {
         // Handle error (e.g., show an error message to the user)
       }
     }
+  };
+
+  const handleEditClick = (menu) => {
+    setMenuToEdit(menu);
+    document.getElementById('edit-drawer').checked = true;
+  };
+
+  const handleEditSuccess = (updatedMenu) => {
+    setUserMenus(prevMenus => 
+      prevMenus.map(menu => menu.id === updatedMenu.id ? updatedMenu : menu)
+    );
+    document.getElementById('edit-drawer').checked = false;
+    setMenuToEdit(null);
   };
 
   const getHref = (id) => {
@@ -71,6 +86,7 @@ export default function UserMenuTable() {
   }
 
   return (
+    <>
     <div className="overflow-x-auto mt-4 mb-2">
       <table className="table">
         {/* head */}
@@ -99,11 +115,9 @@ export default function UserMenuTable() {
               </td>
               <td>
                 <div className="flex gap-2 text-slate-700">
-                  <Link href="">
-                    <div className="btn">
+                <button className="btn" onClick={() => handleEditClick(userMenu)}>
                       <HiOutlinePencil size={20} />
-                    </div>
-                  </Link>
+                    </button>
                   <div>
                     <button
                       className="btn"
@@ -136,5 +150,25 @@ export default function UserMenuTable() {
         </tbody>
       </table>
     </div>
+    {/* Edit Drawer */}
+    <div className="drawer drawer-end z-10">
+    <input id="edit-drawer" type="checkbox" className="drawer-toggle" />
+    <div className="drawer-side">
+      <label htmlFor="edit-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+      <div className="menu bg-white text-base-content min-h-full w-2/6 p-4">
+        {menuToEdit && (
+          <MenuEditForm 
+            menu={menuToEdit} 
+            onSuccess={handleEditSuccess} 
+            onCancel={() => {
+              document.getElementById('edit-drawer').checked = false;
+              setMenuToEdit(null);
+            }}
+          />
+        )}
+      </div>
+    </div>
+  </div>
+  </>
   );
 }
