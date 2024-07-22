@@ -69,23 +69,36 @@ export default function Layout({ children }) {
 }
 
 export function SideNav() {
+  const router = useRouter();
+  const handleClick = () => {
+    localStorage.removeItem('userAccessToken');
+    localStorage.removeItem('userRefreshToken');
+    router.push('/auth/login')
+
+
+  }
   return (
-    <div className="">
+    <div className="relative">
+      <Link href='/dashboard'>
       <div className="flex-col items-center inline-flex p-8 gap-2 bg-indigo-950 rounded-xl mt-2 text-slate-200">
         <p className="text-2xl font-bold">MENUGENIUS</p>
         <p className="text-xs font-medium">USER DASHBOARD</p>
       </div>
+      </Link>
       <div className=" border border-indigo-100 mt-2 "></div>
 
       
         <div className="flex flex-col mt-8 gap-4">
           <NavLinks />
         </div>
+
         <div className="flex gap-2 p-4 fixed bottom-0">
-          <div className="flex gap-4 text-slate-500">
-            <RiLogoutCircleRLine size={24} />
+        <button className="w-full rounded-md p-3" onClick={handleClick}>
+          <div className="flex gap-4 text-slate-500 text-sm font-medium">
+            <RiLogoutCircleRLine size={22} />
             <p>Logout</p>
           </div>
+        </button>
         </div>
     </div>
   );
