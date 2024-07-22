@@ -102,17 +102,24 @@ const links = [
     href: "/dashboard/responses",
     icon: HiOutlineUsers,
   },
-  // {
-  //   name: "USSD Menus",
-  //   href: "/admin/menus",
-  //   icon: TiFlowChildren,
-  // },
-  { name: "Templates", href: "/", icon: GoStack },
-  { name: "Settings", href: "/", icon: CiSettings },
+
+  { name: "Templates", href: "/j", icon: GoStack },
+  { name: "Settings", href: "/js", icon: CiSettings },
 ];
 
 export function NavLinks() {
   const pathname = usePathname();
+
+  const isActiveLink = (href) => {
+    if (href === '/dashboard' && pathname === '/dashboard') {
+      return true;
+    }
+    else if (href === '/dashboard' && pathname.startsWith('/dashboard/flow/')) {
+      return true;
+    }
+    return pathname.startsWith(href) && href !== '/dashboard';
+  };
+  
   return (
     <>
       {links.map((link) => {
@@ -121,10 +128,11 @@ export function NavLinks() {
           <Link key={link.name} href={link.href}
           
           className={clsx(
-            'rounded-md p-3 text-sm font-medium text-slate-500 hover:bg-sky-100 hover:text-blue-600',
+            'rounded-md p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600',
             {
-              'bg-sky-100 text-blue-600': pathname === link.href,
-            },
+              'bg-sky-100 text-blue-600': isActiveLink(link.href),
+              'text-slate-500': !isActiveLink(link.href),
+            }
           )}
           >
             <div className="flex gap-4 items-center">

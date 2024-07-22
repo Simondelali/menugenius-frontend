@@ -126,7 +126,7 @@ export default function UserMenuTable() {
                         document.getElementById(`modal_${userMenu.id}`).showModal();
                       }}
                     >
-                      <HiOutlineTrash size={20} />
+                      <HiOutlineTrash size={20} className="text-red-500"/>
                     </button>
                     <dialog id={`modal_${userMenu.id}`} className="modal">
                       <div className="modal-box">
