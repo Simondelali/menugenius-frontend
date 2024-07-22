@@ -117,7 +117,7 @@ const links = [
   },
 
   { name: "Templates", href: "/j", icon: GoStack },
-  { name: "Settings", href: "/js", icon: CiSettings },
+  { name: "Settings", href: "/dashboard/settings/general", icon: CiSettings },
 ];
 
 export function NavLinks() {
@@ -128,6 +128,9 @@ export function NavLinks() {
       return true;
     }
     else if (href === '/dashboard' && pathname.startsWith('/dashboard/flow/')) {
+      return true;
+    }
+    else if (href === '/dashboard/settings/general' && pathname === '/dashboard/settings/billing') {
       return true;
     }
     return pathname.startsWith(href) && href !== '/dashboard';
