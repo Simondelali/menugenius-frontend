@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <section className="mt-[80px]">
+    <section className="mt-20">
       <div className="flex flex-col justify-center items-center mb-4">
-        <h1 className="text-6xl mb-4">About Us</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4">About Us</h1>
         <Image
           src="/images/about-underline.png"
           alt="About Us underlined"
@@ -13,30 +13,26 @@ export default function About() {
         />
       </div>
 
-      <div className="flex justify-center gap-2.5 mt-[95px]">
+      <div className="flex flex-col lg:flex-row justify-center gap-2.5 mt-24 lg:mt-32">
         <Image
           src="/images/brrng-ussd-integration.png"
-          alt="Hand dialling a USSD shortcode"
+          alt="Hand dialing a USSD shortcode"
           width={500}
           height={400}
+          className="w-full lg:w-1/2 h-auto"
         />
-        {/*<Image 
-        src="/images/sect-divider.png" 
-        alt="A section divder"
-        width={28}
-        height={10}/> */}
-        <div className="w-4 h-72 rounded-lg border-black border-2 mt-[100px] border-gray-900 "></div>
-        <div className="flex flex-col mt-[120px]">
-          <p className="text-2xl mb-4 ">
+        <div className="hidden lg:block w-1 h-72 rounded-lg border-black border-2 border-gray-900 mt-8 lg:mt-24"></div>
+        <div className="flex flex-col mt-8 lg:mt-24 p-4 lg:p-0">
+          <p className="text-lg md:text-xl lg:text-2xl mb-4">
             MenuGenius is an innovative USSD menu
-            <br /> generation platform designed to cater to
-            <br /> the diverse and bespoke needs of both
-            <br /> individuals and corporate entities.
+            <br className="hidden lg:block" /> generation platform designed to cater to
+            <br className="hidden lg:block" /> the diverse and bespoke needs of both
+            <br className="hidden lg:block" /> individuals and corporate entities.
           </p>
-          <p className="text-2xl">
-            You can Easily create dynamic USSD apps
-            <br /> that can be accessed anywhere without
-            <br /> internet connectivity.
+          <p className="text-lg md:text-xl lg:text-2xl">
+            You can easily create dynamic USSD apps
+            <br className="hidden lg:block" /> that can be accessed anywhere without
+            <br className="hidden lg:block" /> internet connectivity.
           </p>
         </div>
       </div>
