@@ -107,7 +107,7 @@ const links = [
     href: "/admin/menus",
     icon: TiFlowChildren,
   },
-  { name: "Templates", href: "/admin/templates", icon: GoStack },
+  { name: "Recent Activities", href: "/admin/activities", icon: GoStack },
   { name: "Settings", href: "/admin/settings", icon: CiSettings },
 ];
 
