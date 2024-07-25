@@ -74,9 +74,8 @@ export function SideNav() {
     localStorage.removeItem('userAccessToken');
     localStorage.removeItem('userRefreshToken');
     router.push('/auth/login')
-
-
   }
+
   return (
     <div className="relative">
       <Link href='/dashboard'>
