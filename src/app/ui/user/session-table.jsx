@@ -14,7 +14,7 @@ export default function SessionTable({ sessionData, error, loading }) {
     currentPage * sessionDataPerPage
   );
 
-  if (loading) return <div className="flex justify-center items-center py-20">Loading...</div>;
+  if (loading) return <div className="flex justify-center items-center py-20"><span className="loading loading-dots loading-lg"></span></div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   if (sessionData.length === 0 ){

@@ -8,6 +8,7 @@ import { CSVLink } from "react-csv";
 export default function Page() {
   const [menus, setMenus] = useState([]);
   const [sortOrder, setSortOrder] = useState("oldest");
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -18,6 +19,8 @@ export default function Page() {
         console.log(response.data);
       } catch (error) {
         setError("Failed to fecth menus");
+      } finally {
+        setLoading(false);
       }
     };
     getMenus();
@@ -51,7 +54,7 @@ export default function Page() {
             </CSVLink>
           </div>
         </div>
-        <MenuTable menus={menus} sortOrder={sortOrder} error={error} />
+        <MenuTable menus={menus} sortOrder={sortOrder} error={error} loading={loading}/>
       </div>
     </div>
   );
@@ -79,7 +82,7 @@ const sortMenus = (menus, sortOrder) => {
   return menus;
 };
 
-export function MenuTable({ menus, sortOrder, error }) {
+export function MenuTable({ menus, sortOrder, error, loading }) {
   // const [menus, setMenus] = useState([]);
   const sortedMenus = sortMenus(menus, sortOrder);
   // const [error, setError]= useState('');
@@ -112,6 +115,15 @@ export function MenuTable({ menus, sortOrder, error }) {
             {/* <th>Date Joined</th> */}
           </tr>
         </thead>
+        {loading ? (
+          <tbody>
+            <td colSpan="5">
+              <div className="flex justify-center items-center py-20">
+                <span className="loading loading-dots loading-lg"></span>
+              </div>
+            </td>  
+        </tbody>
+      ) : (
         <tbody>
           {currentMenus.map((menu, index) => (
             <tr className="hover:bg-gray-50" key={menu.id}>
@@ -125,6 +137,7 @@ export function MenuTable({ menus, sortOrder, error }) {
             </tr>
           ))}
         </tbody>
+        )}
       </table>
       <div className="mt-4 flex justify-end absolute bottom-5 right-5">
         <button

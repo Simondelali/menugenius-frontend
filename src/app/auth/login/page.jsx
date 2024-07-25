@@ -10,12 +10,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setLoading(true);  
     try {
       const response = await axiosInstance.post("/user/login/", {
         email: email,
@@ -32,8 +34,13 @@ export default function Login() {
     } catch (error) {
       if (error.response.status === 401) {
         setError("Email or password must be incorrect");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
       }
+    } finally {
+      setLoading(false);  // Set loading to false when login ends
     }
+    
   };
 
   return (
@@ -87,6 +94,9 @@ export default function Login() {
           type="submit"
           className="w-full h-12 bg-blue-700 rounded-3xl text-white text-xl font-medium font-lato"
         >
+          {loading && (
+            <span className="loading loading-spinner loading-sm mr-2"></span>
+          )}
           Log in
         </button>
       </form>

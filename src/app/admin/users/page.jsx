@@ -10,6 +10,7 @@ import { CiExport } from "react-icons/ci";
 export default function Page() {
   const [users, setUsers] = useState([]);
   const [sortOrder, setSortOrder] = useState("oldest");
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -19,6 +20,8 @@ export default function Page() {
         setUsers(response.data);
       } catch (error) {
         setError("Failed to fecth users");
+      } finally {
+        setLoading(false);
       }
     };
     getUsers();
@@ -53,7 +56,7 @@ export default function Page() {
             </CSVLink>
           </div>
         </div>
-        <UserTable users={users} sortOrder={sortOrder} error={error} />
+        <UserTable users={users} sortOrder={sortOrder} error={error} loading={loading} />
       </div>
     </div>
   );
@@ -81,7 +84,7 @@ const sortUsers = (users, sortOrder) => {
   return users;
 };
 
-export function UserTable({ users, sortOrder, error }) {
+export function UserTable({ users, sortOrder, error, loading }) {
   const sortedUsers = sortUsers(users, sortOrder);
   // const [error, setError]= useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -112,6 +115,16 @@ export function UserTable({ users, sortOrder, error }) {
             <th>Date Joined</th>
           </tr>
         </thead>
+        {loading ? (
+          <tbody>
+            <td colSpan="5">
+              <div className="flex justify-center items-center py-20">
+                <span className="loading loading-dots loading-lg"></span>
+              </div>
+            </td>  
+        </tbody>
+      ) : (
+        
         <tbody>
           {currentUsers.map((user, index) => (
             <tr className="hover:bg-gray-50" key={user.id}>
@@ -125,6 +138,7 @@ export function UserTable({ users, sortOrder, error }) {
             </tr>
           ))}
         </tbody>
+      )}
       </table>
       <div className="mt-4 flex justify-end absolute bottom-5 right-5">
         <button

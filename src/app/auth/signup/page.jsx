@@ -14,6 +14,7 @@ export default function SignupPage() {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -28,6 +29,7 @@ export default function SignupPage() {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setLoading(true); 
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
@@ -60,8 +62,13 @@ export default function SignupPage() {
     } catch (err) {
       if (err.response.status === 400) {
         setError("An account with this email already exists");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
       }
+    } finally {
+      setLoading(false);  // Set loading to false when signup ends
     }
+    
   };
 
   return (
@@ -152,6 +159,9 @@ export default function SignupPage() {
           type="submit"
           className="w-full h-12 bg-blue-700 rounded-3xl text-white text-xl font-medium font-lato"
         >
+          {loading && (
+            <span className="loading loading-spinner loading-sm mr-2"></span>
+          )}
           Sign up
         </button>
       </form>
