@@ -4,19 +4,19 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 
 const members = [
     {
-        name: "Simon Delali",
+        name: "Simon Delali Atiegar",
         position: "Creative Director",
-        profile: "/images/Elipse 5.png",
+        profile: "S",
     },
     {
-        name: "Jeremy Kobby",
+        name: "Jeremy Kobby Patamia",
         position: "Product Designer",
-        profile: "/images/Elipse 5.png",
+        profile: "J",
     },
     {
-        name: "Klogo Selorm",
+        name: "Griffith Selorm Klogo",
         position: "Senior Director",
-        profile: "/images/Elipse 5.png",
+        profile: "G",
     },
 ]
 
@@ -30,27 +30,31 @@ export default function TeamMembersCard(){
                 </div>
             </div>
             {members.map((member) => {
-                return(
-                <div key={member.name} className="flex items-center rounded-2xl shadow h-16 p-2 mt-2 justify-between">
-                <div className="flex gap-4">
-
-                <Image 
-                src={member.profile}
-                alt="profile"
-                width="40"
-                height="40"
-                className="rounded-full"
-                />
-                <div className="">
-                    <p className="text-indigo-900 text-base font-semibold">{member.name}</p>
-                    <p className="text-slate-400 text-xs font-sm">{member.position}</p>
-                </div>
-                </div>
-                <div className="">
-                    <HiOutlineDotsVertical size={24} />
-                </div>
-            </div>
-                )
+                return (
+                  <div
+                    key={member.name}
+                    className="flex items-center rounded-2xl shadow h-16 p-2 mt-2 justify-between"
+                  >
+                    <div className="flex gap-4">
+                      <div className="avatar placeholder">
+                        <div className="bg-blue-900 text-neutral-content w-10 rounded-full">
+                          <span className="text-xl">{member.profile}</span>
+                        </div>
+                      </div>
+                      <div className="">
+                        <p className="text-indigo-900 text-base font-semibold">
+                          {member.name}
+                        </p>
+                        <p className="text-slate-400 text-xs font-sm">
+                          {member.position}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="">
+                      <HiOutlineDotsVertical size={24} />
+                    </div>
+                  </div>
+                );
             })}
         </div>
     )
