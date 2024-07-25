@@ -8,6 +8,7 @@ import MenuEditForm from "./menu-edit-form";
 
 export default function UserMenuTable() {
   const [userMenus, setUserMenus] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [menuToDelete, setMenuToDelete] = useState(null);
   const [menuToEdit, setMenuToEdit] = useState(null);
@@ -60,12 +61,16 @@ export default function UserMenuTable() {
         setUserMenus(response.data);
       } catch (error) {
         setError("Failed to fetch menus, Try again later");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserMenus();
   }, []);
 
+
+  if (loading) return <div className="flex justify-center items-center py-20">Loading...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   if (userMenus.length === 0) {

@@ -23,7 +23,7 @@ export default function Flow() {
       console.log("Fetched menu options:", response.data);
       setMenuOptions(response.data);
     } catch (error) {
-      setError(`Error fetching menu options: ${error.message}`);
+      setError(`Error fetching menu options`);
     } finally {
       setLoading(false);
     }
@@ -39,7 +39,7 @@ export default function Flow() {
       fetchMenuOptions();
       setNewOption({ name: '', value: '', expects_input: false });
     } catch (error) {
-      setError(`Error creating menu option: ${error.message}`);
+      setError(`Error creating menu option`);
     }
   };
 
@@ -49,7 +49,7 @@ export default function Flow() {
       fetchMenuOptions();
       setEditingOption(null);
     } catch (error) {
-      setError(`Error updating menu option: ${error.message}`);
+      setError(`Error updating menu option`);
     }
   };
 
@@ -58,7 +58,7 @@ export default function Flow() {
       await axiosInstance.delete(`/api/delete-menu-option/${menuId}/${optionId}/`);
       fetchMenuOptions();
     } catch (error) {
-      setError(`Error deleting menu option: ${error.message}`);
+      setError(`Error deleting menu option`);
     }
   };
 
@@ -107,7 +107,7 @@ export default function Flow() {
 
   if (loading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
   if (error) return <div className="text-red-500 text-center">{error}</div>;
-
+  
   return (
     <div className="container mx-auto">
       <TopNavBar menuId={menuId} menuName="your menu name" />

@@ -92,7 +92,7 @@ export function SessionResponseTable() {
     <div>
       <ExportCSV sessionData={sessionData} menuId={menuId} />
       <div className="relative h-[65vh]">
-        <SessionTable sessionData={sessionData} error={error} />
+        <SessionTable sessionData={sessionData} error={error} loading={loading}/>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const TopNavBar = ({ menuId }) => {
     const [menuName, setMenuName] = useState('Loading...');
-    const testLink = `http://127.0.0.1:8000/test/${menuId}`;
+    const testLink = `https://menugenius.azurewebsites.net/ussd/${menuId}`;
   
     useEffect(() => {
       const fetchMenuName = async () => {

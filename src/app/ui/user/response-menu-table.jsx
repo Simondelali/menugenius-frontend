@@ -7,6 +7,7 @@ import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 
 export default function UserResponseMenuTable() {
   const [userMenus, setUserMenus] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const pathname = usePathname();
 
@@ -25,12 +26,15 @@ export default function UserResponseMenuTable() {
         setUserMenus(response.data);
       } catch (error) {
         setError("Failed to fetch menus, Try again later");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserMenus();
   }, []);
 
+  if (loading) return <div className="flex justify-center items-center py-20">Loading...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   if (userMenus.length === 0) {

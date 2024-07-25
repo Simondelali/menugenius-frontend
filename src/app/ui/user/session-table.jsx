@@ -1,11 +1,10 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 
-export default function SessionTable({ sessionData, error }) {
+export default function SessionTable({ sessionData, error, loading }) {
   const [currentPage, setCurrentPage] = useState(1);
   const sessionDataPerPage = 8;
   const totalPages = Math.ceil(sessionData.length / sessionDataPerPage);
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -15,6 +14,7 @@ export default function SessionTable({ sessionData, error }) {
     currentPage * sessionDataPerPage
   );
 
+  if (loading) return <div className="flex justify-center items-center py-20">Loading...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   if (sessionData.length === 0 ){
