@@ -133,7 +133,7 @@ const links = [
     icon: HiOutlineUsers,
   },
 
-  { name: "Templates", href: "/j", icon: GoStack },
+  // { name: "Templates", href: "/j", icon: GoStack },
   { name: "Settings", href: "/dashboard/settings/general", icon: CiSettings },
 ];
 

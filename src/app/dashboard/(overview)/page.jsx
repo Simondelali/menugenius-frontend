@@ -51,7 +51,7 @@ export default function Page() {
       </div>
 
       <div className="w-full flex justify-between items-center">
-        <select className="select select-xs select-bordered w-1/6 max-w-xs">
+        <select className="select select-xs select-bordered w-2/6 max-w-xs">
           <option value>View All</option>
           <option>Live</option>
           <option>Production</option>
@@ -75,7 +75,7 @@ export default function Page() {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <div className="menu bg-white text-base-content min-h-full w-2/6 p-4">
+            <div className="menu bg-white text-base-content min-h-full w-4/6 p-4 sm:w-3/6">
               {/* Sidebar content here */}
               <MenuCreateForm />
             </div>
