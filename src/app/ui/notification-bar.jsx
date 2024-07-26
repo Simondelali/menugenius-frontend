@@ -72,7 +72,7 @@ export default function NotificationBar() {
             className="w-full text-slate-400 text-sm font-normal bg-blue-50 focus:outline-none"
           />
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1">
           <BiBell size={24} className="text-slate-400" />
           <FaMoon size={24} className="text-slate-400" />
           <IoMdInformationCircleOutline size={24} className="text-slate-400" />

@@ -39,7 +39,7 @@ export default function Page() {
       <div className="flex justify-between">
         <div>
           <p className="text-slate-500 text-sm font-bold">Hi {user.first_name},</p>
-          <p className="text-indigo-900 text-4xl font-bold">Welcome Back!</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">Welcome Back!</p>
         </div>
         <NotificationBar />
       </div>

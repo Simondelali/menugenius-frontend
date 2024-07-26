@@ -31,7 +31,7 @@ export default function Page() {
     <div>
       <div className="flex justify-between mb-4">
         <div>
-          <p className="text-indigo-900 text-4xl font-bold">User List</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">User List</p>
         </div>
         <NotificationBar />
       </div>
