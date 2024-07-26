@@ -7,7 +7,7 @@ export default function NewUsersCard(){
     const [isLoading, setIsLoading] = useState(true);
 
     return(
-    <div className="flex items-center w-3/12 h-24 bg-white rounded-2xl p-4 gap-4">
+    <div className="flex items-center w-full h-24 bg-white rounded-2xl p-4 gap-4">
         <div className="bg-blue-50 h-14 w-14 rounded-full text-blue-600 flex justify-center items-center">
             <HiUsers size={30}/>
         </div>

@@ -31,7 +31,7 @@ const activities = [
 
 export default function RecentActivity(){
     return(
-        <div className="w-2/6 h-72 bg-white rounded-2xl p-6">
+        <div className="w-full h-auto lg:h-72 bg-white rounded-2xl p-4 lg:p-6">
           <div className="text-indigo-900 text-lg font-bold mb-3">Recent Activities</div> 
           {activities.map((activity) => {
             return(

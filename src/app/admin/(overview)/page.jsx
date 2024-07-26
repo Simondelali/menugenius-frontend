@@ -43,26 +43,28 @@ export default function Page() {
         </div>
         <NotificationBar />
       </div>
-      <div className="flex justify-between mt-8 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-8 gap-2">
         <NewUsersCard />
         <TotalUsersCard />
         <TotaMenusCard />
         <EarningsCard />
       </div>
 
-      <div className="flex justify-between mt-4 gap-2">
-        <div className="relative w-4/6 h-72 bg-white rounded-2xl flex justify-center items-center pt-3">
+      <div className="flex flex-col lg:flex-row justify-between mt-4 gap-2">
+        <div className="w-full lg:w-4/6 h-72 bg-white rounded-2xl flex justify-center items-center pt-3">
           <AdminLineChart />
         </div>
+        <div className="w-full lg:w-2/6">
         <RecentActivity />
+        </div>
       </div>
 
-      <div className="flex justify-between mt-4 gap-2">
-        <div className="w-2/6 h-72 bg-white rounded-2xl flex justify-center items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="w-full h-72 bg-white rounded-2xl flex justify-center items-center">
           <Image src="/images/chart2.png" alt="chart" width="320" height="10" />
         </div>
         <TeamMembersCard />
-        <div className="w-2/6 h-72 bg-white rounded-2xl pt-2">
+        <div className="w-full h-72 bg-white rounded-2xl pt-2">
           <Calendar
             mode="single"
             selected={date}
