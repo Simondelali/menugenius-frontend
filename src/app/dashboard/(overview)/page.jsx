@@ -42,7 +42,7 @@ export default function Page() {
       <div className="flex justify-between">
         <div>
           <p className="text-slate-500 text-sm font-bold">Hi {user.first_name} 👋,</p>
-          <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>
@@ -82,10 +82,6 @@ export default function Page() {
           </div>
         </div>
 
-        {/* <button className="flex items-center justify-center p-2 bg-blue-700 rounded-md h-8 w-24 text-white">
-          Create
-          <CiSquarePlus size={24} />
-        </button> */}
         </div>
       </div>
 

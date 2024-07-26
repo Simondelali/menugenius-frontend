@@ -12,9 +12,11 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../utils/axios";
 import Link from "next/link";
 import clsx from "clsx";
+import { HiMenuAlt2 } from "react-icons/hi";
 
 export default function Layout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isMobileSideNavOpen, setIsMobileSideNavOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -58,10 +60,26 @@ export default function Layout({ children }) {
 
   return (
     <div className="flex">
-      <div className="h-scree hidden lg:flex justify-center overflow-hidden bg-gra-50 p-8 -mt-6 border border-b-2">
+      {/* Desktop SideNav */}
+      <div className="h-scree hidden lg:flex justify-center overflow-hidden p-8 -mt-6 border border-b-2">
         <SideNav />
       </div>
+
+      {/* Mobile SideNav */}
+      <MobileSideNav 
+        isOpen={isMobileSideNavOpen} 
+        onClose={() => setIsMobileSideNavOpen(false)}
+      />
+
+      {/* Main content */}
       <div className="h-screen w-full lg:w-full p-8 overflow-auto">
+        {/* Hamburger menu for mobile */}
+        <button 
+          className="lg:hidden"
+          onClick={() => setIsMobileSideNavOpen(true)}
+        >
+          <HiMenuAlt2 size={24}/>
+        </button>
         {children}
       </div>
     </div>
@@ -158,5 +176,49 @@ export function NavLinks() {
         );
       })}
     </>
+  );
+}
+
+export function MobileSideNav({ isOpen, onClose }) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    localStorage.removeItem('userAccessToken');
+    localStorage.removeItem('userRefreshToken');
+    router.push('/auth/login');
+    onClose();
+  }
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" onClick={onClose}>
+      <div className="relative w-3/4 max-w-sm h-full bg-white shadow-xl p-6" onClick={e => e.stopPropagation()}>
+        <button className="absolute top-4 right-4 text-gray-600" onClick={onClose}>
+          X
+        </button>
+
+        <Link href='/dashboard'>
+          <div className="flex-col items-center inline-flex p-8 gap-2 bg-indigo-950 rounded-xl mt-2 text-slate-200">
+            <p className="text-2xl font-bold">MENUGENIUS</p>
+            <p className="text-xs font-medium">USER DASHBOARD</p>
+          </div>
+        </Link>
+        <div className="border border-indigo-100 mt-2"></div>
+
+        <div className="flex flex-col mt-8 gap-4">
+          <NavLinks />
+        </div>
+
+        <div className="absolute bottom-4 left-4 right-4">
+          <button className="w-full rounded-md p-3" onClick={handleClick}>
+            <div className="flex gap-4 text-slate-500 text-sm font-medium">
+              <RiLogoutCircleRLine size={22} />
+              <p>Logout</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

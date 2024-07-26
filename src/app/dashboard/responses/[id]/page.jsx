@@ -50,7 +50,7 @@ export default function Page() {
           <p className="text-slate-500 text-sm font-bold">
             Hi {user.first_name} 👋,
           </p>
-          <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>
