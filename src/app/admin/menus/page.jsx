@@ -1,9 +1,9 @@
 "use client";
-import NotificationBar from "@/app/ui/notification-bar";
 import axiosInstance from "@/app/utils/axios";
 import { useEffect, useState } from "react";
 import { CiExport } from "react-icons/ci";
 import { CSVLink } from "react-csv";
+import AdminNotificationBar from "@/app/ui/admin-notification-bar";
 
 export default function Page() {
   const [menus, setMenus] = useState([]);
@@ -32,7 +32,7 @@ export default function Page() {
         <div>
           <p className="text-indigo-900 text-2xl md:text-4xl font-bold">Menu List</p>
         </div>
-        <NotificationBar />
+        <AdminNotificationBar />
       </div>
       <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
         <div className="flex justify-between mb-4">

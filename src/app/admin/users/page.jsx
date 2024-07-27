@@ -1,5 +1,5 @@
 "use client";
-import NotificationBar from "@/app/ui/notification-bar";
+import AdminNotificationBar from "@/app/ui/admin-notification-bar";
 import axiosInstance from "@/app/utils/axios";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -33,7 +33,7 @@ export default function Page() {
         <div>
           <p className="text-indigo-900 text-2xl md:text-4xl font-bold">User List</p>
         </div>
-        <NotificationBar />
+        <AdminNotificationBar />
       </div>
 
       <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">

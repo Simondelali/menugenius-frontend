@@ -1,9 +1,7 @@
 'use client'
-// import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import NotificationBar from "@/app/ui/notification-bar";
 import NewUsersCard from "@/app/ui/admin/new-users";
 import TotalUsersCard from "@/app/ui/admin/total-users";
 import TotaMenusCard from "@/app/ui/admin/total-menus";
@@ -15,6 +13,7 @@ import AdminLineChart from "@/app/ui/admin/line-chart";
 import { Calendar } from "@/components/ui/calendar";
 import { useEffect, useState } from "react";
 import axiosInstance from "@/app/utils/axios";
+import AdminNotificationBar from "@/app/ui/admin-notification-bar";
 
 export default function Page() {
   const [date, setDate] = useState(new Date());
@@ -41,7 +40,7 @@ export default function Page() {
           <p className="text-slate-500 text-sm font-bold">Hi {user.first_name},</p>
           <p className="text-indigo-900 text-2xl md:text-4xl font-bold">Welcome Back!</p>
         </div>
-        <NotificationBar />
+        <AdminNotificationBar />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-8 gap-2">
         <NewUsersCard />
