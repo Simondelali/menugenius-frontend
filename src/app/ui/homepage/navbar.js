@@ -36,7 +36,7 @@ export default function Navbar() {
             </button>
           </Link>
           <Link href="/auth/signup">
-            <button className="bg-primary rounded-full px-6 py-2.5 text-white">
+            <button className="bg-blue-700 rounded-full px-6 py-2.5 text-white">
               Get Started
             </button>
           </Link>
