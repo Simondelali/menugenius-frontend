@@ -19,7 +19,7 @@ export default function About() {
           alt="Hand dialing a USSD shortcode"
           width={500}
           height={400}
-          className="w-full lg:w-1/2 h-auto"
+          className=""
         />
         <div className="hidden lg:block w-1 h-72 rounded-lg border-black border-2 border-gray-900 mt-8 lg:mt-24"></div>
         <div className="flex flex-col mt-8 lg:mt-24 p-4 lg:p-0">

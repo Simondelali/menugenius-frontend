@@ -2,39 +2,41 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
-    <footer className="mt-[200px] bg-gray-100 w-full py-10">
-      <div className="flex flex-col lg:flex-row justify-between items-center mt-10 px-4 lg:px-8">
-        <div className="mb-6 lg:mb-0 lg:mr-auto">
-          <Image
-            src="/images/navbar-logo.png"
-            alt="Menugenius-logo"
-            width={150}
-            height={80}
-            className="cursor-pointer"
-          />
-        </div>
-        <div className="flex flex-col items-center lg:items-start lg:ml-[30px]">
-          <h2 className="text-xl font-bold mb-4">Quick Links</h2>
-          <div className="flex flex-col space-y-2 text-center lg:text-left">
-            <Link href="/about" className="hover:text-gray-400">
-              About Us
-            </Link>
-            <Link href="/contact" className="hover:text-gray-400">
-              Contact
-            </Link>
-            <Link href="/privacy" className="hover:text-gray-400">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-gray-400">
-              Terms of Service
-            </Link>
-          </div>
-          <p className="text-sm mt-4 lg:mt-2">
-            © {new Date().getFullYear()} MenuGenius. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
+<footer className="footer bg-white text-base-content p-10 text-black mt-[50px]">
+  <aside>
+
+            <Image
+              src="/images/navbar-logo.png"
+              alt="Menugenius-logo"
+              width={180}
+              height={100}
+              className="cursor-pointer"
+              /> 
+    <p>&copy;{currentYear} Menugenius. All rights reserved </p>          
+
+  </aside>
+  <nav>
+    <h6 className="footer-title">Services</h6>
+    <a className="link link-hover">Branding</a>
+    <a className="link link-hover">Design</a>
+    <a className="link link-hover">Marketing</a>
+    <a className="link link-hover">Advertisement</a>
+  </nav>
+  <nav>
+    <h6 className="footer-title">Company</h6>
+    <Link href="/" className="link link-hover">About us</Link> 
+    <Link href="/" className="link link-hover">Contact</Link> 
+    <Link href="/" className="link link-hover">Jobs</Link> 
+    <Link href="/" className="link link-hover">Press kit</Link>
+  </nav>
+  <nav>
+    <h6 className="footer-title">Legal</h6>
+    <Link href="/" className="link link-hover">Terms of use</Link>
+    <Link href="/" className="link link-hover">Privacy policy</Link>
+    <Link href="/" className="link link-hover">Cookie policy</Link>
+  </nav>
+</footer>
   );
 }
