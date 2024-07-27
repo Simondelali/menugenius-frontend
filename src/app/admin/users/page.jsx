@@ -39,7 +39,7 @@ export default function Page() {
       <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
         <div className="flex justify-between mb-4">
           <div>
-            <p className="font-semibold text-slate-600 text-lg">All Users</p>
+            <p className="font-semibold text-slate-600 text-sm sm:text-xl">All Users</p>
           </div>
           <div className="flex ">
             <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder}/>
@@ -52,7 +52,7 @@ export default function Page() {
               target="_blank"
             >
               <CiExport className="inline-block mr-2" size={24} />
-              Export to csv
+              Export
             </CSVLink>
           </div>
         </div>

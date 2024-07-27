@@ -2,9 +2,9 @@
 import { useState } from 'react';
 
 export default function GeneralSettings() {
-  const [firstName, setFirstName] = useState('Emma');
-  const [lastName, setLastName] = useState('Stone');
-  const [email, setEmail] = useState('emma.stone@example.com');
+  const [firstName, setFirstName] = useState('Kofi');
+  const [lastName, setLastName] = useState('Simon');
+  const [email, setEmail] = useState('kofisimon@gmail.com');
 
   const handleSubmit = (e) => {
     e.preventDefault();
