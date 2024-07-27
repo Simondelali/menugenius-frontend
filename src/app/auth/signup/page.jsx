@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import axiosInstance from "@/app/utils/axios";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -78,7 +79,7 @@ export default function SignupPage() {
       </h2>
 
       <button className="w-full h-12 bg-white border border-zinc-800 rounded-3xl flex items-center justify-center gap-4 mb-4">
-        <img src="/images/google.png" alt="Google Icon" className="w-6 h-6" />
+        <Image src="/images/google.png" alt="Google Icon" className="w-6 h-6" />
         <span className="text-xl font-thin text-zinc-800 font-inter">
           Continue with Google
         </span>

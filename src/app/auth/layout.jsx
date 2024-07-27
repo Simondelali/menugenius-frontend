@@ -1,4 +1,5 @@
 'use client'
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Layout({ children }) {
@@ -26,7 +27,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex h-screen">
       <div className="hidden lg:flex lg:w-1/2 justify-start">
-      <img 
+      <Image 
       src={imgUrl}
       alt="Background Image" 
       className="absolute h-full object-cover" 

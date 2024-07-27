@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axiosInstance from "@/app/utils/axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -50,7 +51,7 @@ export default function Login() {
       </h2>
 
       <button className="w-full h-12 bg-white border border-zinc-800 rounded-3xl flex items-center justify-center gap-4 mb-4">
-        <img src="/images/google.png" alt="Google Icon" className="w-6 h-6" />
+        <Image src="/images/google.png" alt="Google Icon" className="w-6 h-6" />
         <span className="text-xl font-thin text-zinc-800 font-inter">
           Continue with Google
         </span>
@@ -102,7 +103,7 @@ export default function Login() {
       </form>
       <div className="mt-4 text-center flex gap-2 justify-center">
         <span className="text-zinc-800 text-base font-normal font-poppins">
-          Don't have an account?
+          Don&apos;t have an account?
         </span>
         <Link href="./signup">
           <p className="text-neutral-900 text-base font-normal font-poppins underline">
