@@ -50,7 +50,7 @@ export default function Page() {
           <p className="text-slate-500 text-sm font-bold">
             Hi {user.first_name} 👋,
           </p>
-          <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>
@@ -122,31 +122,32 @@ export function ExportCSV({ sessionData, menuId }) {
     return filteredData;
   };
   return (
-    <div className="flex justify-between items-center mt-6">
-      <MenuName menuId={menuId} />
-      <div className="flex">
-        <select
-          onChange={(e) => setFilterOption(e.target.value)}
-          value={filterOption}
-          className="bg-gray-200 rounded-md mr-2 p-1"
-        >
-          <option value="all">All Sessions</option>
-          <option value="today">Today</option>
-          <option value="this_week">This Week</option>
-        </select>
-        <CSVLink
-          data={filterData()}
-          filename={`sessiondata_${filterOption}.csv`}
-          className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-md 
-        hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 
-        transition duration-200"
-          target="_blank"
-        >
-          <CiExport className="inline-block mr-2" size={24} />
-          Export to CSV
-        </CSVLink>
-      </div>
-    </div>
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 space-y-2 sm:space-y-0">
+  <MenuName menuId={menuId} />
+  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
+    <select
+      onChange={(e) => setFilterOption(e.target.value)}
+      value={filterOption}
+      className="bg-gray-200 rounded-md p-1 text-sm sm:text-base w-full sm:w-auto"
+    >
+      <option value="all">All Sessions</option>
+      <option value="today">Today</option>
+      <option value="this_week">This Week</option>
+    </select>
+    <CSVLink
+      data={filterData()}
+      filename={`sessiondata_${filterOption}.csv`}
+      className="inline-block px-3 py-2 sm:px-4 sm:py-2 bg-blue-600 text-white font-medium text-sm sm:text-base rounded-md 
+    hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 
+    transition duration-200 w-full sm:w-auto text-center"
+      target="_blank"
+    >
+      <CiExport className="inline-block mr-1 sm:mr-2" size={16} />
+      <span className="hidden sm:inline">Export</span>
+      <span className="sm:hidden">Export</span>
+    </CSVLink>
+  </div>
+</div>
   );
 }
 
@@ -169,7 +170,7 @@ export function MenuName({ menuId }) {
   }, []);
 
   return (
-    <div className="text-slate-600 text-xl font-semibold mt-4 mb-4">
+    <div className="text-slate-600 text-sm sm:text-xl font-semibold mt-4 mb-4">
       Session Response for {menu.name}
     </div>
   );

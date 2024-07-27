@@ -42,7 +42,7 @@ export default function Page() {
       <div className="flex justify-between">
         <div>
           <p className="text-slate-500 text-sm font-bold">Hi {user.first_name} 👋,</p>
-          <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>
@@ -51,7 +51,7 @@ export default function Page() {
       </div>
 
       <div className="w-full flex justify-between items-center">
-        <select className="select select-xs select-bordered w-1/6 max-w-xs">
+        <select className="select select-xs select-bordered w-2/6 max-w-xs">
           <option value>View All</option>
           <option>Live</option>
           <option>Production</option>
@@ -75,17 +75,13 @@ export default function Page() {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <div className="menu bg-white text-base-content min-h-full w-2/6 p-4">
+            <div className="menu bg-white text-base-content min-h-full w-4/6 p-4 sm:w-3/6">
               {/* Sidebar content here */}
               <MenuCreateForm />
             </div>
           </div>
         </div>
 
-        {/* <button className="flex items-center justify-center p-2 bg-blue-700 rounded-md h-8 w-24 text-white">
-          Create
-          <CiSquarePlus size={24} />
-        </button> */}
         </div>
       </div>
 

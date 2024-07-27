@@ -106,7 +106,7 @@ export default function Flow() {
   };
 
   if (loading) return <div className="flex justify-center items-center h-screen"><span className="loading loading-dots loading-lg"></span></div>;
-  if (error) return <div className="text-red-500 text-center">{error}</div>;
+  if (error) return <div className="text-red-500 text-center text-3xl font-semibold">{error}</div>;
   
   return (
     <div className="container mx-auto">

@@ -22,9 +22,9 @@ function SmallNotificationBar({ userInitial, handleClick }) {
           tabIndex={0}
           className="dropdown-content menu bg-base-100 rounded-box z-[20] w-52 p-2 shadow"
         >
-          <li>
+          {/* <li>
             <Link href="/dashboard/settings/general">Settings</Link>
-          </li>
+          </li> */}
           <li>
             <button onClick={handleClick}>Logout</button>
           </li>
@@ -34,7 +34,7 @@ function SmallNotificationBar({ userInitial, handleClick }) {
   );
 }
 
-export default function NotificationBar() {
+export default function AdminNotificationBar() {
   const [user, setUser] = useState([]);
   const router = useRouter();
 
@@ -53,9 +53,9 @@ export default function NotificationBar() {
 
   const userInitial = user && user.first_name ? user.first_name[0].toUpperCase() : '';
   const handleClick = () => {
-    localStorage.removeItem('userAccessToken');
-    localStorage.removeItem('userRefreshToken');
-    router.push('/auth/login')
+    localStorage.removeItem('adminAccessToken');
+    localStorage.removeItem('adminRefreshToken');
+    router.push('/auth/admin')
   }
 
   return (
@@ -89,9 +89,9 @@ export default function NotificationBar() {
             tabIndex={0}
             className="dropdown-content menu bg-base-100 rounded-box z-[20] w-52 p-2 shadow"
           >
-            <li>
+            {/* <li>
               <Link href="/dashboard/settings/general">Settings</Link>
-            </li>
+            </li> */}
             <li>
               <button onClick={handleClick}>Logout</button>
             </li>

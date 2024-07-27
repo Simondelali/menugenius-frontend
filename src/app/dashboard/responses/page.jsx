@@ -42,14 +42,14 @@ export default function Responses() {
           <p className="text-slate-500 text-sm font-bold">
             Hi {user.first_name} 👋,
           </p>
-          <p className="text-indigo-900 text-4xl font-bold">{getGreeting()}!</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">{getGreeting()}!</p>
         </div>
         <NotificationBar />
       </div>
       <div className="text-slate-600 text-xl font-semibold mt-4">Session Responses</div>
 
       <div className="w-full flex justify-between mt-3">
-        <select className="select select-xs select-bordered w-1/6 max-w-xs">
+        <select className="select select-xs select-bordered w-2/6 max-w-xs">
           <option value>View All</option>
           <option>Live</option>
           <option>Production</option>

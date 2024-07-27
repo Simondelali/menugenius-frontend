@@ -1,5 +1,5 @@
 "use client";
-import NotificationBar from "@/app/ui/notification-bar";
+import AdminNotificationBar from "@/app/ui/admin-notification-bar";
 import axiosInstance from "@/app/utils/axios";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
@@ -31,15 +31,15 @@ export default function Page() {
     <div>
       <div className="flex justify-between mb-4">
         <div>
-          <p className="text-indigo-900 text-4xl font-bold">User List</p>
+          <p className="text-indigo-900 text-2xl md:text-4xl font-bold">User List</p>
         </div>
-        <NotificationBar />
+        <AdminNotificationBar />
       </div>
 
       <div className="relative w-full rounded-3xl bg-white p-8 mt-12 h-[75vh]">
         <div className="flex justify-between mb-4">
           <div>
-            <p className="font-semibold text-slate-600 text-lg">All Users</p>
+            <p className="font-semibold text-slate-600 text-sm sm:text-xl">All Users</p>
           </div>
           <div className="flex ">
             <SortOptions sortOrder={sortOrder} setSortOrder={setSortOrder}/>
@@ -52,7 +52,7 @@ export default function Page() {
               target="_blank"
             >
               <CiExport className="inline-block mr-2" size={24} />
-              Export to csv
+              Export
             </CSVLink>
           </div>
         </div>
