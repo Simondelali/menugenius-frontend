@@ -1,12 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
+'use client'
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className="w-full h-24 shadow-md fixed z-10 bg-white">
       <div className="flex justify-between items-center w-full h-full px-4 2xl:px-16">
         <Link href="/">
-          <div className="ml-[100px]">
+          <div className="lg:ml-[30px]">
             <Image
               src="/images/navbar-logo.png"
               alt="Menugenius-logo"
@@ -16,7 +21,7 @@ export default function Navbar() {
             />
           </div>
         </Link>
-        <div className="flex justify-center flex-grow">
+        <div className="flex justify-center flex-grow hidden lg:flex">
           <ul className="flex justify-between gap-5 font-medium">
             <Link href="/about">
               <li>About</li>
@@ -29,7 +34,7 @@ export default function Navbar() {
             </Link>
           </ul>
         </div>
-        <div className="flex gap-5 mr-[100px]">
+        <div className="flex gap-5 mr-[100px] hidden lg:flex">
           <Link href="/auth/login">
             <button className="border border-black rounded-full px-8 py-2 font-medium">
               Sign In
@@ -41,7 +46,57 @@ export default function Navbar() {
             </button>
           </Link>
         </div>
+        <div className="lg:hidden bg-white flex items-center">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-black focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+      {isOpen && (
+        <div className="lg:hidden bg-white pb-4">
+          <ul className="flex flex-col items-center gap-5 font-medium">
+            <Link href="/about">
+              <li>About</li>
+            </Link>
+            <Link href="/demo">
+              <li>Demo</li>
+            </Link>
+            <Link href="/contact">
+              <li>Contact Us</li>
+            </Link>
+            <Link href="/auth/login">
+              <li>
+                <button className="border border-black rounded-full px-8 py-2 font-medium w-full">
+                  Sign In
+                </button>
+              </li>
+            </Link>
+            <Link href="/auth/signup">
+              <li>
+                <button className="bg-blue-700 rounded-full px-6 py-2.5 text-white w-full">
+                  Get Started
+                </button>
+              </li>
+            </Link>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
