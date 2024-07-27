@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import axiosInstance from '@/app/utils/axios';
 import TopNavBar from '@/app/ui/user/flow/top-nav';
+import CustomError from '@/app/ui/error/CustomError';
+import ErrorModal from '@/app/ui/error/ErrorModal';
 
 export default function Flow() {
   const router = useRouter();
@@ -106,7 +108,12 @@ export default function Flow() {
   };
 
   if (loading) return <div className="flex justify-center items-center h-screen"><span className="loading loading-dots loading-lg"></span></div>;
-  if (error) return <div className="text-red-500 text-center text-3xl font-semibold">{error}</div>;
+//   if (error) return <CustomError
+//   title="Error"
+//   message={error.message}
+//   actionLink="/retry"
+//   actionText="Try Again"
+// />;
   
   return (
     <div className="container mx-auto">
@@ -187,6 +194,15 @@ export default function Flow() {
         <h2 className="text-2xl font-semibold mb-4">Menu Flow</h2>
         {renderMenuOptions(menuOptions)}
       </div>
+      <ErrorModal
+        isOpen={!!error}
+        onClose={() => setError(null)}
+        title="Ooops...😐 An Error occured"
+        message={error}
+        actionText="Back to dashboard"
+        actionLink="/dashboard"
+      />
     </div>
+    
   );
 }

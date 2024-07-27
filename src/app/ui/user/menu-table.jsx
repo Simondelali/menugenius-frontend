@@ -81,7 +81,7 @@ export default function UserMenuTable() {
           <div className="text-center">
             <p className="text-md font-bold ">No menus to show yet</p>
             <p className="text-xs font-semibold">
-              Use the <span className="text-blue-700">'Create +'</span> button
+              Use the <span className="text-blue-700">&apos;Create +&apos;</span> button
               to add a new menu
             </p>
           </div>
