@@ -27,7 +27,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex h-screen">
       <div className="hidden lg:flex lg:w-1/2 justify-start">
-      <Image 
+      <img 
       src={imgUrl}
       alt="Background Image" 
       className="absolute h-full object-cover" 
