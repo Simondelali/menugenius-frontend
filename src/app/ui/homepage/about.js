@@ -4,7 +4,7 @@ export default function About() {
   return (
     <section className="">
       <div className="flex flex-col justify-center items-center mb-4">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4">About Us</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4 text-center">About Us</h1>
         <Image
           src="/images/about-underline.png"
           alt="About Us underlined"
@@ -13,29 +13,22 @@ export default function About() {
         />
       </div>
 
-      <div className="flex flex-col lg:flex-row justify-center gap-2.5">
-        <Image
-          src="/images/brrng-ussd-integration.png"
-          alt="Hand dialing a USSD shortcode"
+      <div className="flex flex-col lg:flex-row justify-center gap-2.5 items-center lg:items-start">
+        <img
+          src="/images/woman-mokup.png"
+          alt="Woman holding a phone"
           width={500}
           height={400}
           className=""
         />
-        <div className="hidden lg:block w-1 h-72 rounded-lg border-black border-2 border-gray-900 mt-8 lg:mt-24"></div>
-        <div className="flex flex-col mt-8 lg:mt-24 p-4 lg:p-0">
+      
+        <div className="flex flex-col mt-8 lg:mt-24 p-4 lg:p-0 lg:max-w-xl text-center lg:text-left">
           <p className="text-lg md:text-xl lg:text-2xl mb-4">
-            MenuGenius is an innovative USSD menu
-            <br className="hidden lg:block" /> generation platform designed to cater to
-            <br className="hidden lg:block" /> the diverse and bespoke needs of both
-            <br className="hidden lg:block" /> individuals and corporate entities.
-          </p>
-          <p className="text-lg md:text-xl lg:text-2xl">
-            You can easily create dynamic USSD apps
-            <br className="hidden lg:block" /> that can be accessed anywhere without
-            <br className="hidden lg:block" /> internet connectivity.
+            MenuGenius is an innovative USSD generation platform designed to cater to the diverse and bespoke needs of both individuals and corporate entities. You can easily create dynamic USSD apps that can be accessed anywhere without internet connectivity.
           </p>
         </div>
       </div>
     </section>
   );
 }
+

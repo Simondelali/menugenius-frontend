@@ -26,9 +26,9 @@ export default function Navbar() {
             <Link href="/about">
               <li>About</li>
             </Link>
-            <Link href="/demo">
+          {/*   <Link href="/demo">
               <li>Demo</li>
-            </Link>
+            </Link>*/}
             <Link href="/contact">
               <li>Contact Us</li>
             </Link>
@@ -74,9 +74,9 @@ export default function Navbar() {
             <Link href="/about">
               <li>About</li>
             </Link>
-            <Link href="/demo">
+          {/* <Link href="/demo"> 
               <li>Demo</li>
-            </Link>
+            </Link> */} 
             <Link href="/contact">
               <li>Contact Us</li>
             </Link>

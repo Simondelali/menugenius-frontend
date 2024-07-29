@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-evenly items-center gap-2 pt-20 px-4 lg:px-0 mb-4">
-      <div className=" lg:ml-[20px] lg:pr-10">
-        <h1 className="text-4xl md:text-5xl  lg:text-6xl font-extrabold ">
+    <div className="flex flex-col-reverse lg:flex-row justify-evenly items-center gap-2 pt-20 px-4 lg:px-0 mb-8 sm:mb-4">
+      <div className="text-center lg:text-left lg:ml-[20px] lg:pr-10">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold">
           <span className="text-blue-600">USSD</span> Solutions
           <br />
           for Africa
@@ -15,7 +15,7 @@ export default function Hero() {
           <br /> generating USSD menus for your business.
         </p>
         <Link href="/auth/signup">
-          <button className="bg-blue-700 rounded-full px-6 py-2.5 mt-4 text-white">
+          <button className="bg-blue-700 rounded-full px-6 py-2.5 mt-4 text-white mx-auto lg:mx-0">
             Get Started
           </button>
         </Link>
@@ -32,3 +32,5 @@ export default function Hero() {
     </div>
   );
 }
+
+
