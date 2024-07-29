@@ -160,7 +160,7 @@ export default function UserMenuTable() {
     <input id="edit-drawer" type="checkbox" className="drawer-toggle" />
     <div className="drawer-side">
       <label htmlFor="edit-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-      <div className="menu bg-white text-base-content min-h-full w-3/6 p-4">
+      <div className="menu bg-white text-base-content min-h-full w-4/6 sm:w-3/6 p-4">
         {menuToEdit && (
           <MenuEditForm 
             menu={menuToEdit} 

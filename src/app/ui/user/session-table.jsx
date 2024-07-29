@@ -18,7 +18,7 @@ export default function SessionTable({ sessionData, error, loading }) {
   if (error) return <div className="text-red-500">{error}</div>;
 
   if (sessionData.length === 0 ){
-    return <div className='text-2xl font-semibold text-center text-slate-700'>NO Session Data For This Menu </div>
+    return <div className='text-lg sm:text-2xl font-semibold text-center text-slate-700 mt-4'>NO Session Data For This Menu </div>
   }
 
   return (

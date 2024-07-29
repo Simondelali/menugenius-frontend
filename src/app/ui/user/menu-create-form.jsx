@@ -43,14 +43,14 @@ export default function MenuCreateForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="h-12 font-semibold text-lg">{name}</div>
+      <div className="h-12 font-semibold text-lg mb-4">{name}</div>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {success && <p className="text-green-500 mb-4">{success}</p>}
-      <label className="text-slate-600">
+      <label className="text-slate-600 space-y-1">
         <p className="font-semibold">Name</p>
         <p className="font-normal">A memorable menu name</p>
       </label>
-      <div className="mb-4">
+      <div className="mb-4 mt-2">
         <input
           type="text"
           value={name}
@@ -60,11 +60,11 @@ export default function MenuCreateForm() {
           required
         />
       </div>
-      <label className="text-slate-600">
+      <label className="text-slate-600 space-y-1">
         <p className="font-semibold">Description</p>
         <p className="font-normal">A summary of flow objective</p>
       </label>
-      <div className="mb-2">
+      <div className="mb-2 mt-2">
         <textarea
           type="text"
           value={description}

@@ -32,7 +32,7 @@ const TopNavBar = ({ menuId }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-          <p className='font-semibold text-sm whitespace-nowrap'>Callback url:</p>
+          <p className=' hidden sm:block font-semibold text-sm whitespace-nowrap'>Callback url:</p>
           <div className="flex items-center space-x-2 w-full sm:w-auto">
             <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 flex-grow sm:flex-grow-0">
               <input 
