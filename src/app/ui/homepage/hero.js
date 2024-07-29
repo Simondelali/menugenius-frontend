@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-evenly items-center gap-2 py-20 px-4 lg:px-0">
+    <div className="flex flex-col-reverse lg:flex-row justify-evenly items-center gap-2 pt-20 px-4 lg:px-0 mb-4">
       <div className=" lg:ml-[20px] lg:pr-10">
         <h1 className="text-4xl md:text-5xl  lg:text-6xl font-extrabold ">
           <span className="text-blue-600">USSD</span> Solutions

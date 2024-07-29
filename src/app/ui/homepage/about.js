@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <section className="mt-20">
+    <section className="">
       <div className="flex flex-col justify-center items-center mb-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4">About Us</h1>
         <Image
@@ -13,7 +13,7 @@ export default function About() {
         />
       </div>
 
-      <div className="flex flex-col lg:flex-row justify-center gap-2.5 mt-24 lg:mt-32">
+      <div className="flex flex-col lg:flex-row justify-center gap-2.5">
         <Image
           src="/images/brrng-ussd-integration.png"
           alt="Hand dialing a USSD shortcode"
