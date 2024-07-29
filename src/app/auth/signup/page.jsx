@@ -34,11 +34,13 @@ export default function SignupPage() {
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
+      setLoading(false);
       return;
     }
 
     if (formData.password.length < 8) {
       setError("Password must have a minimum of 8 characters");
+      setLoading(false);
       return;
     }
 
