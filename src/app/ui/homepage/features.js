@@ -4,7 +4,7 @@ import featureData from "./data";
 
 export default function Features() {
   return (
-    <section className="mt-20">
+    <section className="mt-8">
       <div className="flex flex-col justify-center items-center mb-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4">Features</h1>
         <Image
@@ -15,7 +15,7 @@ export default function Features() {
         />
       </div>
       {/* Card Area */}
-      <div className="flex flex-wrap justify-center gap-4 mt-20">
+      <div className="flex flex-wrap justify-center gap-4 mt-4">
         {featureData.map((feature) => (
           <FeatureCard
             key={feature.img}

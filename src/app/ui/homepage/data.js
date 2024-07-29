@@ -7,7 +7,7 @@ const featureData = [
     
     {
         img: "/images/template.png",
-        title:"customizable Templates" ,
+        title:"Customizable Templates" ,
         info: "Choose from a wide range of templates that suit your business needs" ,
     },
     

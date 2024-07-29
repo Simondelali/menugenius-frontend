@@ -11,7 +11,7 @@ export default function FeatureCard({ photo, title, info }) {
         height={110}
         className="mb-4"
       />
-      <h2 className="text-xl md:text-2xl font-bold mb-2 text-center uppercase">{title}</h2>
+      <h2 className="text-xl md:text-2xl font-bold mb-2 text-center">{title}</h2>
       <p className="text-sm md:text-md text-gray-600 text-center uppercase mb-4">{info}</p>
       <p className="text-lg md:text-xl font-bold uppercase text-[#254DD9] text-center cursor-pointer">Learn more</p>
     </div>
