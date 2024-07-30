@@ -134,8 +134,6 @@ const links = [
     href: "/admin/menus",
     icon: TiFlowChildren,
   },
-  { name: "Recent Activities", href: "/admin/activities", icon: GoStack },
-  // { name: "Settings", href: "/admin/settings", icon: CiSettings },
 ];
 
 export function NavLinks() {
