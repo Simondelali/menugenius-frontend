@@ -31,7 +31,7 @@ export default function ContactUs() {
             Contact Us
           </h1>
           <p className="mt-4 text-xl sm:text-2xl text-gray-700 max-w-3xl mx-auto">
-            We're here to help. Reach out to us with any questions or inquiries.
+            We&aposre here to help. Reach out to us with any questions or inquiries.
           </p>
         </header>
 

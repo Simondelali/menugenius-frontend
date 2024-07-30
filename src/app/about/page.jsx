@@ -57,7 +57,7 @@ export default function MenugeniusDocumentation() {
           <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
             <ol className="list-decimal list-inside space-y-3 sm:space-y-4 text-base sm:text-xl text-gray-700">
               <li>Sign up for a MenuGenius account and log in to the dashboard.</li>
-              <li>Click "Create New Flow" and choose a template or start from scratch.</li>
+              <li>Click &quot;Create New Flow&quot; and choose a template or start from scratch.</li>
               <li>Use the drag-and-drop interface to add menu items and define their actions.</li>
               <li>Set up conditional logic and branching paths as needed.</li>
               <li>Preview your flow in real-time and test it thoroughly.</li>
