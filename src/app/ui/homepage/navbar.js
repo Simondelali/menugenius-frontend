@@ -9,7 +9,8 @@ export default function Navbar() {
 
   return (
     <nav className="w-full h-24 shadow-md fixed z-10 bg-white">
-      <div className="flex justify-between items-center w-full h-full px-4 2xl:px-16">
+      <div className="flex items-center w-full h-full px-4 2xl:px-16">
+      <div className="w-1/3">
         <Link href="/">
           <div className="lg:ml-[30px]">
             <Image
@@ -21,32 +22,30 @@ export default function Navbar() {
             />
           </div>
         </Link>
-        <div className="flex justify-center flex-grow hidden lg:flex">
-          <ul className="flex justify-between gap-5 font-medium">
-            <Link href="/about">
-              <li>About</li>
-            </Link>
-          {/*   <Link href="/demo">
-              <li>Demo</li>
-            </Link>*/}
-            <Link href="/contact">
-              <li>Contact Us</li>
-            </Link>
-          </ul>
         </div>
-        <div className="flex gap-5 mr-[100px] hidden lg:flex">
-          <Link href="/auth/login">
-            <button className="border border-black rounded-full px-8 py-2 font-medium">
-              Sign In
-            </button>
-          </Link>
-          <Link href="/auth/signup">
-            <button className="bg-blue-700 rounded-full px-6 py-2.5 text-white">
-              Get Started
-            </button>
-          </Link>
-        </div>
-        <div className="lg:hidden bg-white flex items-center">
+        <div className="w-1/3 flex justify-center hidden lg:flex">
+      <ul className="flex justify-center gap-5 font-medium">
+        <Link href="/about">
+          <li>About</li>
+        </Link>
+        <Link href="/contact">
+          <li>Contact Us</li>
+        </Link>
+      </ul>
+    </div>
+    <div className="w-1/3 flex justify-end gap-5 hidden lg:flex">
+      <Link href="/auth/login">
+        <button className="border border-black rounded-full px-8 py-2 font-medium">
+          Sign In
+        </button>
+      </Link>
+      <Link href="/auth/signup">
+        <button className="bg-blue-700 rounded-full px-6 py-2.5 text-white">
+          Get Started
+        </button>
+      </Link>
+    </div>
+        <div className="lg:hidden bg-white ml-auto">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-black focus:outline-none"

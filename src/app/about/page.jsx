@@ -34,7 +34,7 @@ export default function MenugeniusDocumentation() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <FeatureCard
               title="Rapid Menu Creation"
-              description="Design and deploy USSD menus with unparalleled speed and simplicity using our intuitive drag-and-drop interface and extensive template library."
+              description="Design and deploy USSD menus with unparalleled speed and simplicity using our intuitive interface and extensive template library."
               icon="🚀"
             />
             <FeatureCard
@@ -58,8 +58,7 @@ export default function MenugeniusDocumentation() {
             <ol className="list-decimal list-inside space-y-3 sm:space-y-4 text-base sm:text-xl text-gray-700">
               <li>Sign up for a MenuGenius account and log in to the dashboard.</li>
               <li>Click &quot;Create New Flow&quot; and choose a template or start from scratch.</li>
-              <li>Use the drag-and-drop interface to add menu items and define their actions.</li>
-              <li>Set up conditional logic and branching paths as needed.</li>
+              <li>Use our intuitive interface to add menu items and define their actions.</li>
               <li>Preview your flow in real-time and test it thoroughly.</li>
               <li>Configure integration with your existing systems or APIs.</li>
               <li>Assign a shortcode to your flow (or use our shared shortcode service).</li>
