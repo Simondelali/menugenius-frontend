@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const TopNavBar = ({ menuId }) => {
     const [menuName, setMenuName] = useState('Loading...');
-    const testLink = `https://menugenius.azurewebsites.net/ussd/${menuId}`;
+    const testLink = `https://menugenius.azurewebsites.net/ussd/${menuId}/`;
     const [showCopied, setShowCopied] = useState(false);
 
   
